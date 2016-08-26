@@ -7,7 +7,7 @@ mysql:
 
 bind:
   zone_export_path: data/zones
-  zone_file_path: data/zones.conf
+  zone_clauses_file: data/zones.conf
   commands:
     reload: touch data/reloaded
     check_config: echo
