@@ -14,6 +14,7 @@ gem 'nifty-utils'
 gem 'nilify_blanks'
 gem 'authie'
 gem 'kaminari'
+gem 'hashie'
 
 group :development, :test do
   gem 'byebug'
