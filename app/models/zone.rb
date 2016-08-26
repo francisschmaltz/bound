@@ -42,6 +42,7 @@ class Zone < ApplicationRecord
 
   scope :stale, -> { where("published_at IS NULL OR updated_at > published_at") }
 
+  default_value :serial, -> { 1 }
   default_value :refresh_time, -> { 3600 }
   default_value :retry_time, -> { 120 }
   default_value :expiration_time, -> { 2419200 }
@@ -60,7 +61,7 @@ class Zone < ApplicationRecord
       s << format_hostname(self.primary_ns) + " "
       s << format_email(self.email_address) + " "
       s << "("
-      s << (self.serial || (0)).to_s + " "
+      s << self.serial.to_s + " "
       s << self.refresh_time.to_s + " "
       s << self.retry_time.to_s + " "
       s << self.expiration_time.to_s + " "
@@ -99,7 +100,7 @@ class Zone < ApplicationRecord
   end
 
   def mark_as_published
-    update_column(:published_at, Time.now)
+    update_columns(:published_at => Time.now, :serial => self.serial + 1)
   end
 
   def zone_file_path
