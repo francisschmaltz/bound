@@ -17,6 +17,8 @@
 #  updated_at      :datetime         not null
 #
 
+require 'open3'
+
 class Zone < ApplicationRecord
 
   # These control the spacing allocated to each column which is exported into
@@ -85,6 +87,76 @@ class Zone < ApplicationRecord
 
   def format_email(email_address)
     email_address.to_s.gsub('@', '.') + "."
+  end
+
+  def mark_as_published
+    update_column(:published_at, Time.now)
+  end
+
+  def self.publish(options = {})
+    zones = options[:all] ? Zone.all : Zone.stale
+    zone_directory = File.expand_path(Bound.config.bind.zone_export_path, Rails.root)
+    puts "Exporting zones to #{zone_directory}".yellow
+    FileUtils.mkdir_p(zone_directory)
+
+    if zones.empty?
+      puts "No zones were found to export".blue
+      return false
+    end
+
+    zones.each do |zone|
+      zone_file_path = File.join(zone_directory, zone.name + ".zone")
+      File.open(zone_file_path, 'w') do |f|
+        f.write(zone.zone_file + "\n")
+      end
+      zone.mark_as_published
+      puts "=> Exported #{zone.name}".green
+    end
+
+    check_configuration
+    reload_configuration
+    zones
+  end
+
+  class BindError < StandardError
+    attr_reader :error, :type
+
+    def initialize(type, error)
+      @type = type
+      @error = error
+    end
+
+    def to_s
+      "[#{@type}] #{@error}"
+    end
+  end
+
+  def self.check_configuration
+    if cmd = Bound.config.bind&.commands&.check_config
+      stdout, stderr, status = Open3.capture3(cmd)
+      if status == 0
+        true
+      else
+        raise BindError.new(:config_error, stdout + stderr)
+      end
+    else
+      Rails.logger.warn "Cannot check configuration before not check config command has been provided.".yellow
+      true
+    end
+  end
+
+  def self.reload_configuration
+    if cmd = Bound.config.bind&.commands&.reload
+      stdout, stderr, status = Open3.capture3(cmd)
+      if status == 0
+        true
+      else
+        raise BindError.new(:reload_error, stdout + stderr)
+      end
+    else
+      Rails.logger.warn "Cannot reload configuration before not check config command has been provided.".yellow
+      true
+    end
   end
 
 end
