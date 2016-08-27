@@ -15,6 +15,13 @@ gem 'nilify_blanks'
 gem 'authie'
 gem 'kaminari'
 gem 'hashie'
+gem 'dynamic_form'
+gem 'omniauth'
+
+require_relative './lib/bound/config'
+if Bound.yaml_config['auth'] && strategy = Bound.yaml_config['auth']['strategy']
+  gem "omniauth-#{strategy}"
+end
 
 group :development, :test do
   gem 'byebug'

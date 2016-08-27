@@ -1,0 +1,12 @@
+%h1 Add new user
+%p
+  To add a new user just enter their e-mail address below. An email will be sent to them
+  and they'll be prompted to login or create their own account with your chosen
+  authentication provider.
+= form_for @user do |f|
+  = f.error_messages
+  %dl
+    %dt= f.label :email_address
+    %dt= f.text_field :email_address
+  %p= f.submit "Send invite e-mail"
+

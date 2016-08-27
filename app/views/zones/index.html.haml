@@ -1,0 +1,8 @@
+%h1 Zones
+%ul
+  - for zone in @zones
+    %li= link_to zone.name, zone
+%hr
+%ul
+  %li= link_to "Users", users_path
+  %li= link_to "Logout", logout_path, :method => :delete

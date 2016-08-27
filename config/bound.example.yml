@@ -15,3 +15,11 @@ bind:
 rails:
   environment: development
   secret_key: ad1a6538c2b3cb4f231fad413898ce6144712232b24676d13879eb8704c61fe23b5f8e41e7a519498a8c78c2a95875412052f76e202bf6af9e7394a13d1eb8f8
+
+auth:
+  strategy: atech
+  description: aTech Identity
+  client_key: xx
+  client_secret: xx
+  scopes: null
+

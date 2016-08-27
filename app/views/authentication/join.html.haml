@@ -1,0 +1,5 @@
+%h1 Create an account
+%p
+  To create an account and access Bound you need to login using #{Bound.config.auth.description}.
+  If you don't already have an account you may be prompted to create one.
+%p= link_to "Continue", "/auth/#{Bound.config.auth.strategy}"
