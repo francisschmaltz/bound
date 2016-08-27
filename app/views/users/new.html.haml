@@ -1,3 +1,4 @@
+- @page_title = "Add new user"
 %h1 Add new user
 %p
   To add a new user just enter their e-mail address below. An email will be sent to them
@@ -10,3 +11,5 @@
     %dt= f.text_field :email_address
   %p= f.submit "Send invite e-mail"
 
+%ul
+  %li= link_to "Back to user list", users_path

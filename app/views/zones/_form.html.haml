@@ -1,0 +1,20 @@
+= form_for @zone do |f|
+  = f.error_messages
+  %dl
+    %dt= f.label :name
+    %dd= f.text_field :name, :disabled => @zone.persisted?
+    %dt= f.label :primary_ns
+    %dd= f.text_field :primary_ns
+    %dt= f.label :email_address
+    %dd= f.text_field :email_address
+    %dt= f.label :refresh_time
+    %dd= f.text_field :refresh_time, :placeholder => Zone::DEFAULT_REFRESH_TIME
+    %dt= f.label :retry_time
+    %dd= f.text_field :retry_time, :placeholder => Zone::DEFAULT_RETRY_TIME
+    %dt= f.label :expiration_time
+    %dd= f.text_field :expiration_time, :placeholder => Zone::DEFAULT_EXPIRATION_TIME
+    %dt= f.label :max_cache
+    %dd= f.text_field :max_cache, :placeholder => Zone::DEFAULT_MAX_CACHE
+    %dt= f.label :ttl
+    %dd= f.text_field :ttl, :placeholder => Zone::DEFAULT_TTL
+  %p= f.submit

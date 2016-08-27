@@ -1,0 +1,6 @@
+- @page_title = "Edit Zone - #{@zone.name}"
+%h1 Edit zone
+= render 'form'
+%ul
+  %li= link_to "Delete zone", @zone, :method => :delete, :data => {:confirm => "Are you sure you wish to remove this zone?"}
+  %li= link_to "Back to records", @zone

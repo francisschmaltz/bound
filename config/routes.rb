@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   get 'join/:invite_token' => 'authentication#join', :as => 'join'
   delete 'logout' => 'authentication#logout'
 
-  resources :zones
+  resources :zones do
+    resources :record
+  end
   resources :users
 
   root 'zones#index'

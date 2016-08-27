@@ -1,0 +1,26 @@
+- @page_title = @zone.name
+%h1= @zone.name
+
+%table{:border => 1, :width => "100%"}
+  %thead
+    %tr
+      %td Name
+      %td TTL
+      %td Type
+      %td Data
+  %tbody
+    - if @records.empty?
+      %tr
+        %td{:colspan => 4} There are no records for this zone yet.
+    - else
+      - for record in @records
+        %tr
+          %td= record.name
+          %td= record.ttl
+          %td= record.type.type
+          %td= record.data
+
+%ul
+  %li= link_to "Add a new record", new_zone_record_path(@zone)
+  %li= link_to "Edit zone", edit_zone_path(@zone)
+  %li= link_to "Back to zone list", root_path
