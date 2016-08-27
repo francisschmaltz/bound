@@ -9,4 +9,6 @@
         or
         = link_to "copy join URL", join_path(user.invite_token)
       )
-%p= link_to "Add new user", new_user_path
+%ul
+  %li= link_to "Add new user", new_user_path
+  %li= link_to "Back to zone list", root_path

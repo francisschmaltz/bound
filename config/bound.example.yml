@@ -23,3 +23,12 @@ auth:
   client_secret: xx
   scopes: null
 
+smtp:
+  host: localhost
+  username: null
+  password: null
+  from_address: Bound <bound@example.com>
+
+web:
+  protocol: http
+  host: localhost:3000
