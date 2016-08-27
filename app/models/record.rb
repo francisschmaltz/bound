@@ -6,7 +6,7 @@
 #  zone_id    :integer
 #  name       :string(255)
 #  type       :string(255)
-#  data       :string(255)
+#  data       :string(4096)
 #  ttl        :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null

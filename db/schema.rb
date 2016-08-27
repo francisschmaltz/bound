@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160827143509) do
+ActiveRecord::Schema.define(version: 20160827183223) do
 
   create_table "authie_sessions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "token"
@@ -42,10 +42,10 @@ ActiveRecord::Schema.define(version: 20160827143509) do
     t.integer  "zone_id"
     t.string   "name"
     t.string   "type"
-    t.string   "data"
+    t.string   "data",       limit: 4096
     t.integer  "ttl"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
