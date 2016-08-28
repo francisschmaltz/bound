@@ -1,0 +1,73 @@
+.fieldSet {
+
+}
+
+.fieldSet__field {
+  display: flex;
+  border-bottom:1px solid #efefef;
+  padding-bottom:25px;
+  margin-bottom: 25px;
+}
+
+.fieldSet__label {
+  width:20%;
+  margin-right:5%;
+  color:#aaa;
+  text-transform: uppercase;
+  padding-left: 15px;
+  font-size:12px;
+  font-weight:600;
+  display: flex;
+  align-items:center;
+}
+
+.fieldSet__input {
+  width:calc(75% - 15px);
+}
+
+.fieldSet__helpText {
+  font-size:13px;
+  line-height:1.5;
+  margin-bottom:15px;
+  color:#333;
+  a { text-decoration:underline; }
+}
+
+.fieldSet__helpTitle {
+  font-size:15px;
+  font-weight:600;
+  margin-bottom:8px;
+}
+
+.fieldSet__helpList {
+  font-size:13px;
+  line-height:1.5;
+  margin-bottom:15px;
+  li {
+    list-style:square;
+    margin-left:25px;
+  }
+}
+
+.fieldSet__helpTitle + .fieldSet__helpText {
+  color:#aaa;
+}
+
+.fieldSet__helpTitle + .fieldSet__helpList {
+  color:#aaa;
+}
+
+.fieldSet__submit {
+  margin-left:25%;
+  font-size:14px;
+  .button {
+    margin-right:7px;
+  }
+  a {
+    text-decoration:underline;
+  }
+}
+
+.fieldSet__delete {
+  float:right;
+}

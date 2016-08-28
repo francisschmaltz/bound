@@ -1,0 +1,37 @@
+.zoneList {
+  border:1px solid #ddd;
+  li:nth-child(even) {
+    .zoneList__item {
+      background-color:#f7f7f7;
+    }
+  }
+  li:last-child {
+    .zoneList__item {
+      border-bottom:0;
+    }
+  }
+}
+.zoneList__item {
+  display:block;
+  border-bottom:1px solid #ddd;
+  padding:12px 15px;
+    &:hover {
+    color:$blue;
+  }
+}
+
+.zoneList__itemUpdated {
+  float:right;
+  font-size:14px;
+  color:#ccc;
+}
+
+.zoneList__stale {
+  background:#ff6600;
+  color:#fff;
+  padding:1px 3px;
+  font-size:11px;
+  border-radius:2px;
+  line-height:10px;
+  margin-right:4px;
+}

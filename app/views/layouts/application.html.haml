@@ -3,9 +3,19 @@
   %head
     %title #{@page_title} - Bound
     = csrf_meta_tags
-    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag "https://fonts.googleapis.com/css?family=Lato:300,400,600,700,900", :async => true
+    = stylesheet_link_tag 'application/application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     %meta{:name => "turbolinks-cache-control", :content => "no-cache"}
   %body
-    = display_flash
-    = yield
+    .page
+      = display_flash
+
+      .header
+        - if logged_in?
+          %ul.header__nav
+            %li.header__userName= current_user.description
+            %li= link_to "Zones", root_path
+            %li= link_to "Users", users_path
+            %li= link_to "Logout", logout_path, :method => :delete
+      = yield

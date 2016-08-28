@@ -1,9 +1,15 @@
 - @page_title = "Zones"
-%h1 Zones
-%ul
-  - for zone in @zones
-    %li= link_to zone.name, zone
-%ul
-  %li= link_to "Add new zone", new_zone_path
-  %li= link_to "Users", users_path
-  %li= link_to "Logout", logout_path, :method => :delete
+.page__header
+  .page__headerButton= link_to "Add new zone", new_zone_path, :class => 'button'
+  Zones
+.page__content
+  %ul.zoneList
+    - for zone in @zones
+      %li
+        = link_to zone, :class => 'zoneList__item' do
+          = zone.name
+          .zoneList__itemUpdated
+            - if zone.stale?
+              %span.zoneList__stale Pending
+            Last updated #{distance_of_time_in_words_to_now zone.updated_at} ago
+

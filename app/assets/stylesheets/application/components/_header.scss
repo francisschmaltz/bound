@@ -1,0 +1,31 @@
+.header {
+  border-bottom:2px solid $blue;
+  padding-bottom:8px;
+  overflow:hidden;
+}
+
+.header__title {
+  float:left;
+  color:#222;
+  font-size:12px;
+  font-weight:700;
+}
+
+.header__nav {
+  float:right;
+  color:#999;
+  font-size:12px;
+  margin-top:2px;
+  li {
+    float:left;
+    margin-left:15px;
+    a {
+      text-decoration:underline;
+    }
+  }
+}
+
+.header__userName {
+  font-weight:600;
+  color:#333;
+}

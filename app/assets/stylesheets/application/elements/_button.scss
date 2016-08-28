@@ -1,0 +1,45 @@
+.button {
+  display:inline-block;
+  font:inherit;
+  appearance:none;
+  text-decoration:none !important;
+  background:#128efb;
+  color:#fff;
+  font-size:13px;
+  padding:5px 13px;
+  border:2px solid darken(#128efb, 20%);
+  &:active {
+    background-color:darken(#128efb, 15%);
+  }
+}
+
+.button--green {
+  background-color:#49cf89;
+  border-color:darken(#49cf89, 15%);
+  &:active {
+    background-color:darken(#49cf89, 15%);
+  }
+}
+
+.button--red {
+  background-color:#fa174c;
+  border-color:darken(#fa174c, 15%);
+  &:active {
+    background-color:darken(#fa174c, 15%);
+  }
+}
+
+
+
+.buttonSet {
+  .button {
+    margin-right:10px;
+  }
+}
+
+.buttonSet--onRight {
+  .button {
+    margin-left:10px;
+    margin-right:0;
+  }
+}

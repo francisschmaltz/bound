@@ -3,7 +3,7 @@ class ZonesController < ApplicationController
   before_action { params[:id] && @zone = Zone.find(params[:id]) }
 
   def index
-    @zones = Zone.order(:name)
+    @zones = Zone.order(:updated_at => :desc)
   end
 
   def show

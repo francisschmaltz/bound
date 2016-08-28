@@ -39,7 +39,7 @@ class Zone < ApplicationRecord
 
   has_many :records, :dependent => :destroy
 
-  validates :name, :presence => true, :hostname => true
+  validates :name, :presence => true, :hostname => true, :uniqueness => true
   validates :primary_ns, :presence => true, :hostname => true
   validates :email_address, :presence => true, :email_address => true
   validates :serial, :numericality => {:only_integer => true, :allow_blank => true}
@@ -57,6 +57,10 @@ class Zone < ApplicationRecord
   default_value :expiration_time, -> { DEFAULT_EXPIRATION_TIME }
   default_value :max_cache, -> { DEFAULT_MAX_CACHE }
   default_value :ttl, -> { DEFAULT_TTL }
+
+  def stale?
+    published_at.nil? || updated_at > published_at
+  end
 
   def generate_zone_file_header
     String.new.tap do |s|

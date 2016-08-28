@@ -1,0 +1,27 @@
+.recordTable {
+  width:100%;
+  font-size:14px;
+  td {
+    border-bottom:1px solid #ddd;
+    padding:8px 10px;
+  }
+
+  thead td {
+    border-bottom:1px solid #aaa;
+    font-size:13px;
+    font-weight:bold;
+    padding:4px 10px;
+  }
+
+  tbody tr:nth-child(even) td {
+    background:#f7f7f7;
+  }
+
+  .recordTable__empty {
+    text-align:center;
+    padding:40px 0;
+    color:#999;
+    font-style:italic;
+  }
+}
+

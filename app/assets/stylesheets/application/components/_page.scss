@@ -1,0 +1,26 @@
+.page {
+  max-width:800px;
+  padding:0 15px;
+  margin:40px auto;
+}
+
+.page__header {
+  font-size:20px;
+  color:$blue;
+  padding:15px;
+  border:1px solid lighten($blue, 40%);
+  border-top:0;
+  background:lighten($blue, 44%);
+}
+
+.page__headerButton {
+  float:right;
+  margin-top:-5px;
+  .button {
+    margin-left:5px;
+  }
+}
+
+.page__content {
+  margin:25px 0;
+}

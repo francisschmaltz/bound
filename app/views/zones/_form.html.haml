@@ -1,20 +1,48 @@
-= form_for @zone do |f|
+= form_for @zone, :html => {:class => 'form'} do |f|
   = f.error_messages
-  %dl
-    %dt= f.label :name
-    %dd= f.text_field :name, :disabled => @zone.persisted?
-    %dt= f.label :primary_ns
-    %dd= f.text_field :primary_ns
-    %dt= f.label :email_address
-    %dd= f.text_field :email_address
-    %dt= f.label :refresh_time
-    %dd= f.text_field :refresh_time, :placeholder => Zone::DEFAULT_REFRESH_TIME
-    %dt= f.label :retry_time
-    %dd= f.text_field :retry_time, :placeholder => Zone::DEFAULT_RETRY_TIME
-    %dt= f.label :expiration_time
-    %dd= f.text_field :expiration_time, :placeholder => Zone::DEFAULT_EXPIRATION_TIME
-    %dt= f.label :max_cache
-    %dd= f.text_field :max_cache, :placeholder => Zone::DEFAULT_MAX_CACHE
-    %dt= f.label :ttl
-    %dd= f.text_field :ttl, :placeholder => Zone::DEFAULT_TTL
-  %p= f.submit
+  .fieldSet
+    .fieldSet__field
+      = f.label :name, :class => 'fieldSet__label'
+      .fieldSet__input
+        = f.text_field :name, :disabled => @zone.persisted?, :class => 'textInput', :autofocus => @zone.new_record?, :placeholder => "e.g. example.com"
+
+    .fieldSet__field
+      = f.label :primary_ns, :class => 'fieldSet__label'
+      .fieldSet__input
+        .fieldSet__helpText
+          This is the primary name server address for this zone. Leave this blank to use
+          the default primary name server address.
+        = f.text_field :primary_ns, :class => 'textInput', :placeholder => Bound.config.dns_defaults.primary_ns
+
+    .fieldSet__field
+      = f.label :email_address, :class => 'fieldSet__label'
+      .fieldSet__input
+        .fieldSet__helpText
+          This is the e-mail address which will be published in the zone's SOA record
+          and should be entered as normal. Leave this blank to use the default e-mail
+          address.
+        = f.text_field :email_address, :class => 'textInput', :placeholder => Bound.config.dns_defaults.email_address
+
+    - if @zone.persisted?
+      .fieldSet__field
+        = f.label :refresh_time, :class => 'fieldSet__label'
+        .fieldSet__input= f.text_field :refresh_time, :class => 'textInput', :placeholder => Zone::DEFAULT_REFRESH_TIME
+      .fieldSet__field
+        = f.label :retry_time, :class => 'fieldSet__label'
+        .fieldSet__input= f.text_field :retry_time, :class => 'textInput', :placeholder => Zone::DEFAULT_RETRY_TIME
+      .fieldSet__field
+        = f.label :expiration_time, :class => 'fieldSet__label'
+        .fieldSet__input= f.text_field :expiration_time, :class => 'textInput', :placeholder => Zone::DEFAULT_EXPIRATION_TIME
+      .fieldSet__field
+        = f.label :max_cache, :class => 'fieldSet__label'
+        .fieldSet__input= f.text_field :max_cache, :class => 'textInput', :placeholder => Zone::DEFAULT_MAX_CACHE
+      .fieldSet__field
+        = f.label :ttl, :class => 'fieldSet__label'
+        .fieldSet__input= f.text_field :ttl, :class => 'textInput', :placeholder => Zone::DEFAULT_TTL
+
+    .fieldSet__submit
+      = f.submit "Save zone", :class => 'button'
+      or
+      = link_to "back to list", zones_path
+      .fieldSet__delete
+        = link_to "Delete zone", @zone, :method => :delete, :data => {:confirm => "Are you sure you wish to remove this zone?"}, :class => 'button button--red'
