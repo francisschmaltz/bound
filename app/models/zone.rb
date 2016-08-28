@@ -67,8 +67,8 @@ class Zone < ApplicationRecord
       s << "@".ljust(ZF_NAME_SPACE, ' ') + " "
       s << "IN".ljust(ZF_CLASS_SPACE, ' ')
       s << "SOA".ljust(ZF_TYPE_SPACE, ' ') + " "
-      s << format_hostname(self.primary_ns) + " "
-      s << format_email(self.email_address) + " "
+      s << self.primary_ns + " "
+      s << self.email_address.to_s.gsub('@', '.') + " "
       s << "("
       s << self.serial.to_s + " "
       s << self.refresh_time.to_s + " "
@@ -94,18 +94,6 @@ class Zone < ApplicationRecord
       s << "  file \"#{zone_file_path}\";\n"
       s << "};"
     end
-  end
-
-  def format_hostname(hostname)
-    if hostname.ends_with?('.')
-      hostname
-    else
-      "#{hostname}.#{name}"
-    end
-  end
-
-  def format_email(email_address)
-    email_address.to_s.gsub('@', '.') + "."
   end
 
   def mark_as_published

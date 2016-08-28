@@ -21,8 +21,31 @@ class Record < ApplicationRecord
   validates :name, :hostname => true
   validates :type, :presence => true
   validates :ttl, :numericality => {:only_integer => true, :allow_blank => true}
-  validates :data, :presence => true
   validate :validate_data
+
+  before_save :serialize_form_data
+
+  def form_data
+    @form_data ||= type ? type.deserialize(data) : nil
+  end
+
+  def form_data=(value)
+    @form_data = value
+  end
+
+  def serialize_form_data
+    if @form_data
+      self.data = type ? type.serialize(@form_data) : nil
+    end
+  end
+
+  def full_name
+    if self.name.present?
+      "#{name}.#{zone.name}"
+    else
+      zone.name
+    end
+  end
 
   def bind_line
     String.new.tap do |s|
@@ -35,9 +58,9 @@ class Record < ApplicationRecord
   end
 
   def validate_data
-    if self.type && self.data.present?
+    if self.type && @form_data
       type_errors = []
-      self.type.validate(self.data, type_errors)
+      self.type.validate(@form_data, type_errors)
       type_errors.each do |error|
         self.errors.add :base, error
       end

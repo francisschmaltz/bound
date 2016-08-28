@@ -15,7 +15,7 @@
     - else
       - for record in @records
         %tr
-          %td= record.name
+          %td= link_to record.name || "@", edit_zone_record_path(@zone, record)
           %td= record.ttl
           %td= record.type.type
           %td= record.data

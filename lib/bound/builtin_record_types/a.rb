@@ -7,6 +7,26 @@ module Bound
       self.type_name = "A"
       self.type_description = "An IPv4 address for a host"
 
+      def fields
+        [
+          {:name => 'ip', :label => "IPv4 Address"}
+        ]
+      end
+
+      def validate(hash, errors)
+        if hash['ip'].blank? || !(hash['ip'].to_s =~ /\A\d+\.\d+\.\d+\.\d+\z/)
+          errors << "Address is not a valid IPv4 address"
+        end
+      end
+
+      def serialize(hash)
+        hash['ip']
+      end
+
+      def deserialize(string)
+        {'ip' => string}
+      end
+
     end
   end
 end

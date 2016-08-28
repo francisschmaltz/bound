@@ -24,30 +24,30 @@ module Bound
       []
     end
 
-    # This method will receive the user submitted value and it should add errors
+    # This method will receive the user submitted hash and it should add errors
     # to the provided array. If nothing is added, the record is considered value.
-    def validate(value, errors)
+    def validate(hash, errors)
     end
 
-    # The user will submit a value from the form which will either be a single
-    # text field (if there are no fields) or a hash containing multiple values
-    # (if the type has fields). This method will receive the value and it should
-    # return a string that will be presented to bind.
-    def serialize(value)
-      value
+    # The user will provide a hash of values (for the fields defined above).
+    # This method should serialize the data for storage in the database's data
+    # column. It should be much like will be presented to BIND (although additional
+    # manipulations can be made with the prepare_for_bind method which is used
+    # on export).
+    def serialize(hash)
+      hash.inspect
     end
 
-    # This method will receive a string and it should be convert into a string
-    # (if there are no fields) or a hash (if there are fields). This will be
-    # provided back to the user if they edit a record.
-    def deserialize(value)
-      value
+    # This method will receive a serialized string and it should be convert into
+    # a hash. This will be provided back to the form for editting records.
+    def deserialize(string)
+      string
     end
 
     # This method will receive the serialized string and it should return the
     # value which should be exported into the bind config file.
-    def prepare_for_bind(value)
-      value
+    def prepare_for_bind(string)
+      string
     end
 
   end

@@ -7,7 +7,7 @@ class ZonesController < ApplicationController
   end
 
   def show
-    @records = @zone.records.order(:name).to_a
+    @records = @zone.records.order(:name, :type).to_a
   end
 
   def new

@@ -1,0 +1,6 @@
+- @page_title = "#{@record.full_name} - #{@zone.name}"
+%h1 Edit record for #{@zone.name}
+= render 'form'
+%ul
+  %li= link_to "Delete record", [@zone, @record], :method => :delete, :data => {:confirm => "Are you sure?"}
+  %li= link_to "Back to records", @zone
