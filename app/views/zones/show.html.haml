@@ -5,7 +5,7 @@
     = link_to "Add new record", new_zone_record_path(@zone), :class => 'button'
     = link_to "Edit zone", edit_zone_path(@zone), :class => 'button'
 .page__content
-  %table.recordTable
+  %table.dataTable.u-margin
     %thead
       %tr
         %td{:width => "25%"} Name
@@ -15,7 +15,7 @@
     %tbody
       - if @records.empty?
         %tr
-          %td.recordTable__empty{:colspan => 4} There are no records for this zone yet.
+          %td.dataTable__empty{:colspan => 4} There are no records for this zone yet.
       - else
         - for record in @records
           %tr
@@ -24,3 +24,4 @@
             %td= record.type.type
             %td= record.data
 
+  %p.u-align-right= link_to "View raw zone file", zone_file_zone_path(@zone), :class => 'u-subLink', :target => '_blank'

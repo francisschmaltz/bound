@@ -10,6 +10,10 @@ class ZonesController < ApplicationController
     @records = @zone.records.order(:name, :type).to_a
   end
 
+  def zone_file
+    render :plain => @zone.generate_zone_file
+  end
+
   def new
     @zone = Zone.new
   end

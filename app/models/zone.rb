@@ -51,6 +51,8 @@ class Zone < ApplicationRecord
 
   scope :stale, -> { where("published_at IS NULL OR updated_at > published_at") }
 
+  default_value :primary_ns, -> { Bound.config.dns_defaults.primary_ns }
+  default_value :email_address, -> { Bound.config.dns_defaults.email_address }
   default_value :serial, -> { 1 }
   default_value :refresh_time, -> { DEFAULT_REFRESH_TIME }
   default_value :retry_time, -> { DEFAULT_RETRY_TIME }

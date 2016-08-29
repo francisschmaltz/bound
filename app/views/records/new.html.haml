@@ -1,3 +1,4 @@
 - @page_title = "New record - #{@zone.name}"
-%h1 New record for #{@zone.name}
-= render 'form'
+.page__header
+  New record for #{@zone.name}
+.page__content= render 'form'

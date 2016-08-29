@@ -1,17 +1,27 @@
 = form_for [@zone, @record] do |f|
   = f.error_messages
-  %dl
-    %dt= f.label :type
-    %dd= f.select :type, options_for_select(Bound::RecordType.all.values.map { |rt| [rt.class.type_name, rt.class.name] }, f.object.type.class.name), {}, :class => 'js-record-type-select'
-    %dt= f.label :name
-    %dd= f.text_field :name
-    %dt= f.label :ttl
-    %dd= f.text_field :ttl, :placeholder => @zone.ttl
+  .fieldSet
+    .fieldSet__field
+      = f.label :type, :class => 'fieldSet__label'
+      .fieldSet__input= f.select :type, options_for_select(Bound::RecordType.all.values.map { |rt| [rt.class.type_name, rt.class.name] }, f.object.type.class.name), {}, :class => 'js-record-type-select textInput textInput--select', :autofocus => true
+    .fieldSet__field
+      = f.label :name, :class => 'fieldSet__label'
+      .fieldSet__input= f.text_field :name, :class => 'textInput'
 
-  - for key, type in Bound::RecordType.all
-    %dl{:data => {:type => key}}
-      - for field in type.fields
-        %dt= label_tag "record[form_data_hash][#{field[:name]}]", field[:label]
-        %dd= record_type_field_tag @record, type, field
+    - for key, type in Bound::RecordType.all
+      .s{:data => {:type => key}}
+        - for field in type.fields
+          .fieldSet__field
+            = label_tag "record[form_data_hash][#{field[:name]}]", field[:label], :class => 'fieldSet__label'
+            .fieldSet__input= record_type_field_tag @record, type, field
+    .fieldSet__field
+      = f.label :ttl, :class => 'fieldSet__label'
+      .fieldSet__input= f.text_field :ttl, :class => 'textInput', :placeholder => @zone.ttl
 
-  %p= f.submit
+  .fieldSet__submit
+    = f.submit "Save record", :class => "button"
+    or
+    = link_to "back to zone", @zone
+    - if @record.persisted?
+      .fieldSet__delete
+        = link_to "Delete record", [@zone, @record], :method => :delete, :data => {:confirm => "Are you sure you wish to remove this record?"}, :class => 'button button--red'

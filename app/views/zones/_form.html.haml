@@ -44,5 +44,6 @@
       = f.submit "Save zone", :class => 'button'
       or
       = link_to "back to list", zones_path
-      .fieldSet__delete
-        = link_to "Delete zone", @zone, :method => :delete, :data => {:confirm => "Are you sure you wish to remove this zone?"}, :class => 'button button--red'
+      - if @zone.persisted?
+        .fieldSet__delete
+          = link_to "Delete zone", @zone, :method => :delete, :data => {:confirm => "Are you sure you wish to remove this zone?"}, :class => 'button button--red'

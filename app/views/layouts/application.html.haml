@@ -12,10 +12,12 @@
       = display_flash
 
       .header
-        - if logged_in?
-          %ul.header__nav
+        %ul.header__nav
+          - if logged_in?
             %li.header__userName= current_user.description
             %li= link_to "Zones", root_path
             %li= link_to "Users", users_path
             %li= link_to "Logout", logout_path, :method => :delete
+          - else
+            %li Not logged in
       = yield

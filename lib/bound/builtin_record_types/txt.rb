@@ -9,7 +9,7 @@ module Bound
 
       def fields
         [
-          {:name => 'data', :label => 'Text data'}
+          {:name => 'data', :label => 'Text data', :type => 'textarea'}
         ]
       end
 

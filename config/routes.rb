@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   delete 'logout' => 'authentication#logout'
 
   resources :zones do
+    get :zone_file, :on => :member
     resources :records
   end
   resources :users
