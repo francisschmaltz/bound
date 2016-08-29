@@ -40,6 +40,19 @@ class ZonesController < ApplicationController
     redirect_to root_path, :notice => "#{@zone.name} has been removed successfully"
   end
 
+  def publish
+    if request.post?
+      publisher = Bound::Publisher.new
+      if zones = publisher.publish
+        redirect_to_with_return_to root_path, :notice => "Changed have been applied for #{zones.size} zone(s)"
+      else
+        redirect_to_with_return_to root_path, :alert => "There are no changes to apply."
+      end
+    else
+      @zones = Zone.stale
+    end
+  end
+
   private
 
   def safe_params

@@ -10,5 +10,7 @@ Rails.application.routes.draw do
   end
   resources :users
 
+  match 'publish' => 'zones#publish', :via => [:get, :post]
+
   root 'zones#index'
 end

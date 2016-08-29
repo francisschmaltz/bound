@@ -1,0 +1,8 @@
+- @page_title = "Apply Changes"
+%h1.page__header Apply Pending Changes
+.page__content
+  %p.u-margin The following zones have been changed and have updates pending.
+  %ul.standardList.u-margin
+    - for zone in @zones
+      %li= zone.name
+  %p= link_to "Apply Changes", publish_path(:return_to => params[:return_to]), :method => :post, :class => "button"

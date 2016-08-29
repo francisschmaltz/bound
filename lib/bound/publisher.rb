@@ -21,6 +21,7 @@ module Bound
       generate_zone_clauses
       check_configuration
       reload_configuration
+      zones
     end
 
     def export_zone_files

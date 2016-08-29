@@ -10,4 +10,18 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def stale?
+    @count ||= Zone.stale.count
+    @count > 0
+  end
+  helper_method :stale?
+
+  def redirect_to_with_return_to(url, *args)
+    if params[:return_to].blank? || !params[:return_to].starts_with?('/')
+      redirect_to url, *args
+    else
+      redirect_to params[:return_to], *args
+    end
+  end
+
 end
