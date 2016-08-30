@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160827183223) do
+ActiveRecord::Schema.define(version: 20160830085623) do
 
   create_table "authie_sessions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "token"
@@ -36,6 +36,20 @@ ActiveRecord::Schema.define(version: 20160827183223) do
     t.index ["browser_id"], name: "index_authie_sessions_on_browser_id", using: :btree
     t.index ["token"], name: "index_authie_sessions_on_token", using: :btree
     t.index ["user_id"], name: "index_authie_sessions_on_user_id", using: :btree
+  end
+
+  create_table "changes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "zone_id"
+    t.integer  "user_id"
+    t.string   "event"
+    t.string   "name"
+    t.string   "attribute_name"
+    t.string   "old_value",      limit: 4096
+    t.string   "new_value",      limit: 4096
+    t.datetime "published_at"
+    t.integer  "serial"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   create_table "records", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

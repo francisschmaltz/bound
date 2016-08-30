@@ -25,6 +25,25 @@ class Record < ApplicationRecord
 
   before_save :serialize_form_data
 
+  ATTRIBUTES_TO_TRACK = ['ttl']
+
+  after_create { Change.create!(:zone => zone, :event => "RecordAdded", :name => description) }
+  after_destroy { Change.create!(:zone => zone, :event => "RecordDeleted", :name => description) }
+  after_update do
+    if self.data_changed?
+      Change.create!(:zone => zone, :event => "RecordDataChanged", :name => description, :old_value => self.data_was, :new_value => self.data)
+    end
+
+    if self.name_changed?
+      Change.create!(:zone => zone, :event => "RecordRenamed", :name => description, :old_value => self.full_name_was, :new_value => self.full_name)
+    end
+
+    for key, (old_value, new_value) in self.changes
+      next unless ATTRIBUTES_TO_TRACK.include?(key.to_s)
+      Change.create!(:zone => zone, :event => "RecordAttributeChanged", :name => description, :attribute_name => key, :old_value => old_value, :new_value => new_value)
+    end
+  end
+
   def form_data
     @form_data ||= type ? type.deserialize(data) : nil
   end
@@ -45,6 +64,18 @@ class Record < ApplicationRecord
     else
       zone.name
     end
+  end
+
+  def full_name_was
+    if self.name_was.present?
+      "#{name_was}.#{zone.name}"
+    else
+      zone.name
+    end
+  end
+
+  def description
+    "#{self.full_name} (#{self.type.type})"
   end
 
   def bind_line

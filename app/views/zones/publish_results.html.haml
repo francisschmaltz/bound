@@ -1,0 +1,34 @@
+- @page_title = "Apply Changes"
+%h1.page__header Apply Pending Changes
+.page__content
+  .publishResult{:class => @result.success? ? "publishResult--success" : "publishResult--failed"}
+    - if @result.success?
+      %p.publishResult__title Changes applied successfully.
+    - else
+      %p.publishResult__title Changes not applied successfully.
+
+    .publishResult__content
+
+      - unless @result.success?
+        - if @result.reload == false
+          %p Failed to reload. Check the system logs for any issues with this.
+        - else
+          %pre.publishResult__configError~ @result.configuration_errors
+
+      .publishResult__list
+        %h2.publishResult__subTitle Zone files exported
+        - if @result.zone_files_exported.empty?
+          %p.publishResult__noData No zone files were exported.
+        - else
+          %ul.publishResult__fileList
+            - for file in @result.zone_files_exported
+              %li= file
+
+      .publishResult__list
+        %h2.publishResult__subTitle Zone files deleted
+        - if @result.zone_files_deleted.empty?
+          %p.publishResult__noData No zone files were deleted.
+        - else
+          %ul.publishResult__fileList
+            - for file in @result.zone_files_deleted
+              %li= file

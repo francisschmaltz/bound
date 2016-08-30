@@ -38,6 +38,7 @@ class Zone < ApplicationRecord
   DEFAULT_TTL = 3600
 
   has_many :records, :dependent => :destroy
+  has_many :pending_changes, -> { pending }, :class_name => 'Change', :dependent => :destroy
 
   validates :name, :presence => true, :hostname => true, :uniqueness => true
   validates :primary_ns, :presence => true, :hostname => true
@@ -49,8 +50,6 @@ class Zone < ApplicationRecord
   validates :max_cache, :numericality => {:only_integer => true}
   validates :ttl, :numericality => {:only_integer => true}
 
-  scope :stale, -> { where("published_at IS NULL OR updated_at > published_at") }
-
   default_value :primary_ns, -> { Bound.config.dns_defaults.primary_ns }
   default_value :email_address, -> { Bound.config.dns_defaults.email_address }
   default_value :serial, -> { 1 }
@@ -60,8 +59,19 @@ class Zone < ApplicationRecord
   default_value :max_cache, -> { DEFAULT_MAX_CACHE }
   default_value :ttl, -> { DEFAULT_TTL }
 
-  def stale?
-    published_at.nil? || updated_at > published_at
+  ATTRIBUTES_TO_TRACK = ['primary_ns', 'email_address', 'refresh_time', 'retry_time', 'expiration_time', 'max_cache', 'ttl']
+
+  after_create { Change.create!(:zone => self, :event => "ZoneAdded", :name => self.name) }
+  after_destroy { Change.create!(:zone => self, :event => "ZoneDeleted", :name => self.name) }
+  after_update do
+    for key, (old_value, new_value) in self.changes
+      next unless ATTRIBUTES_TO_TRACK.include?(key.to_s)
+      Change.create!(:zone => self, :event => "ZoneAttributeChanged", :name => self.name, :attribute_name => key, :old_value => old_value, :new_value => new_value)
+    end
+  end
+
+  def changes_pending?
+    pending_changes.size > 0
   end
 
   def generate_zone_file_header
@@ -102,8 +112,9 @@ class Zone < ApplicationRecord
     end
   end
 
-  def mark_as_published
-    update_columns(:published_at => Time.now, :serial => self.serial + 1)
+  def mark_as_published(time = Time.now)
+    self.pending_changes.update_all(:published_at => time, :serial => self.serial)
+    update_columns(:published_at => time, :serial => self.serial + 1)
   end
 
   def zone_file_path

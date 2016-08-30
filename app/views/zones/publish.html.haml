@@ -1,8 +1,14 @@
 - @page_title = "Apply Changes"
 %h1.page__header Apply Pending Changes
 .page__content
-  %p.u-margin The following zones have been changed and have updates pending.
-  %ul.standardList.u-margin
-    - for zone in @zones
-      %li= zone.name
-  %p= link_to "Apply Changes", publish_path(:return_to => params[:return_to]), :method => :post, :class => "button"
+  - if @changes.empty?
+    %p.u-margin There are currently no changes pending. Use the button below to reload all configuration.
+  - else
+    %p.u-margin The follow changes are currently pending and will be applied when you press the button below.
+    %ul.changeList.u-margin
+      - for change in @changes
+        %li.changeList__item{:class => "changeList__item--#{change.event}"}
+          %p.changeList__description= change.description.gsub(/\[(.*?)\]/) { content_tag(:b, h($1)) }.html_safe
+          %p.changeList__timestamp= change.created_at.to_s(:long)
+
+  %p= link_to "Apply these changes", publish_path, :method => :post, :class => "button"

@@ -9,7 +9,7 @@
         = link_to zone, :class => 'zoneList__item' do
           = zone.name
           .zoneList__itemUpdated
-            - if zone.stale?
-              %span.zoneList__stale Pending
+            - if zone.changes_pending?
+              %span.zoneList__hasChanges Pending
             Last updated #{distance_of_time_in_words_to_now zone.updated_at} ago
 

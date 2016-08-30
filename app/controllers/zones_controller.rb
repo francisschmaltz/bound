@@ -3,7 +3,7 @@ class ZonesController < ApplicationController
   before_action { params[:id] && @zone = Zone.find(params[:id]) }
 
   def index
-    @zones = Zone.order(:updated_at => :desc)
+    @zones = Zone.order(:updated_at => :desc).includes(:pending_changes)
   end
 
   def show
@@ -42,14 +42,12 @@ class ZonesController < ApplicationController
 
   def publish
     if request.post?
-      publisher = Bound::Publisher.new
-      if zones = publisher.publish
-        redirect_to_with_return_to root_path, :notice => "Changed have been applied for #{zones.size} zone(s)"
-      else
-        redirect_to_with_return_to root_path, :alert => "There are no changes to apply."
-      end
+      publisher = Bound::Publisher.new(:all => Change.pending.empty?)
+      publisher.publish
+      @result = publisher.result
+      render 'publish_results'
     else
-      @zones = Zone.stale
+      @changes = Change.pending.order(:created_at)
     end
   end
 

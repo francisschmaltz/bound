@@ -10,11 +10,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def stale?
-    @count ||= Zone.stale.count
-    @count > 0
+  def changes_pending
+    @changes_pending ||= Change.pending.count
   end
-  helper_method :stale?
+  helper_method :changes_pending
 
   def redirect_to_with_return_to(url, *args)
     if params[:return_to].blank? || !params[:return_to].starts_with?('/')

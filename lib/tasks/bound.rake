@@ -5,9 +5,11 @@ namespace :bound do
     Bound::Publisher.new(:all => true).publish
   end
 
-  desc 'Publish stale zones'
+  desc 'Publish zones'
   task :publish => :environment do
-    Bound::Publisher.new.publish
+    publisher = Bound::Publisher.new
+    publisher.publish
+    puts publisher.result.inspect
   end
 
 
