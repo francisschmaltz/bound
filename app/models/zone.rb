@@ -71,7 +71,7 @@ class Zone < ApplicationRecord
       s << "; Zone file exported from Bound at #{Time.now.utc.to_s}\n"
       s << "; Bound Zone ID: #{id}\n\n"
       s << "$TTL".ljust(ZF_NAME_SPACE, ' ') + " #{self.ttl}\n"
-      s << "$ORIGIN".ljust(ZF_NAME_SPACE, ' ') + " #{self.name}\n\n"
+      s << "$ORIGIN".ljust(ZF_NAME_SPACE, ' ') + " #{self.name}.\n\n"
       s << "@".ljust(ZF_NAME_SPACE, ' ') + " "
       s << "IN".ljust(ZF_CLASS_SPACE, ' ')
       s << "SOA".ljust(ZF_TYPE_SPACE, ' ') + " "
