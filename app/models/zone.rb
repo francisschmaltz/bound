@@ -23,8 +23,6 @@ class Zone < ApplicationRecord
 
   attr_readonly :name
 
-  # These control the spacing allocated to each column which is exported into
-  # zone files.
   ZF_NAME_SPACE = 25
   ZF_TTL_SPACE = 8
   ZF_CLASS_SPACE = 4
@@ -53,7 +51,6 @@ class Zone < ApplicationRecord
   default_value :ttl, -> { Bound.config.dns_defaults.ttl }
 
   ATTRIBUTES_TO_TRACK = ['primary_ns', 'email_address', 'refresh_time', 'retry_time', 'expiration_time', 'max_cache', 'ttl']
-
   after_create { Change.create!(:zone => self, :event => "ZoneAdded", :name => self.name) }
   after_destroy { Change.create!(:zone => self, :event => "ZoneDeleted", :name => self.name) }
   after_update do

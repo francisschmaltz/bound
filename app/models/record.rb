@@ -26,7 +26,6 @@ class Record < ApplicationRecord
   before_save :serialize_form_data
 
   ATTRIBUTES_TO_TRACK = ['ttl']
-
   after_create { Change.create!(:zone => zone, :event => "RecordAdded", :name => description) }
   after_destroy { Change.create!(:zone => zone, :event => "RecordDeleted", :name => description) }
   after_update do
