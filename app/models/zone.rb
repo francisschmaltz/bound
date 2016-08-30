@@ -30,13 +30,6 @@ class Zone < ApplicationRecord
   ZF_CLASS_SPACE = 4
   ZF_TYPE_SPACE = 10
 
-  # Default values for new zones
-  DEFAULT_REFRESH_TIME = 3600
-  DEFAULT_RETRY_TIME = 120
-  DEFAULT_EXPIRATION_TIME = 2419200
-  DEFAULT_MAX_CACHE = 600
-  DEFAULT_TTL = 3600
-
   has_many :records, :dependent => :destroy
   has_many :pending_changes, -> { pending }, :class_name => 'Change', :dependent => :destroy
 
@@ -50,14 +43,14 @@ class Zone < ApplicationRecord
   validates :max_cache, :numericality => {:only_integer => true}
   validates :ttl, :numericality => {:only_integer => true}
 
+  default_value :serial, -> { 1 }
   default_value :primary_ns, -> { Bound.config.dns_defaults.primary_ns }
   default_value :email_address, -> { Bound.config.dns_defaults.email_address }
-  default_value :serial, -> { 1 }
-  default_value :refresh_time, -> { DEFAULT_REFRESH_TIME }
-  default_value :retry_time, -> { DEFAULT_RETRY_TIME }
-  default_value :expiration_time, -> { DEFAULT_EXPIRATION_TIME }
-  default_value :max_cache, -> { DEFAULT_MAX_CACHE }
-  default_value :ttl, -> { DEFAULT_TTL }
+  default_value :refresh_time, -> { Bound.config.dns_defaults.refresh_time }
+  default_value :retry_time, -> { Bound.config.dns_defaults.retry_time }
+  default_value :expiration_time, -> { Bound.config.dns_defaults.expiration_time }
+  default_value :max_cache, -> { Bound.config.dns_defaults.max_cache }
+  default_value :ttl, -> { Bound.config.dns_defaults.ttl }
 
   ATTRIBUTES_TO_TRACK = ['primary_ns', 'email_address', 'refresh_time', 'retry_time', 'expiration_time', 'max_cache', 'ttl']
 

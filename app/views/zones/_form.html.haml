@@ -26,19 +26,19 @@
     - if @zone.persisted?
       .fieldSet__field
         = f.label :refresh_time, :class => 'fieldSet__label'
-        .fieldSet__input= f.text_field :refresh_time, :class => 'textInput', :placeholder => Zone::DEFAULT_REFRESH_TIME
+        .fieldSet__input= f.text_field :refresh_time, :class => 'textInput', :placeholder => Bound.config.dns_defaults.refresh_time
       .fieldSet__field
         = f.label :retry_time, :class => 'fieldSet__label'
-        .fieldSet__input= f.text_field :retry_time, :class => 'textInput', :placeholder => Zone::DEFAULT_RETRY_TIME
+        .fieldSet__input= f.text_field :retry_time, :class => 'textInput', :placeholder => Bound.config.dns_defaults.retry_time
       .fieldSet__field
         = f.label :expiration_time, :class => 'fieldSet__label'
-        .fieldSet__input= f.text_field :expiration_time, :class => 'textInput', :placeholder => Zone::DEFAULT_EXPIRATION_TIME
+        .fieldSet__input= f.text_field :expiration_time, :class => 'textInput', :placeholder => Bound.config.dns_defaults.expiration_time
       .fieldSet__field
         = f.label :max_cache, :class => 'fieldSet__label'
-        .fieldSet__input= f.text_field :max_cache, :class => 'textInput', :placeholder => Zone::DEFAULT_MAX_CACHE
+        .fieldSet__input= f.text_field :max_cache, :class => 'textInput', :placeholder => Bound.config.dns_defaults.max_cache
       .fieldSet__field
         = f.label :ttl, :class => 'fieldSet__label'
-        .fieldSet__input= f.text_field :ttl, :class => 'textInput', :placeholder => Zone::DEFAULT_TTL
+        .fieldSet__input= f.text_field :ttl, :class => 'textInput', :placeholder => Bound.config.dns_defaults.ttl
 
     .fieldSet__submit
       = f.submit "Save zone", :class => 'button'
