@@ -17,7 +17,7 @@ class RecordsController < ApplicationController
 
   def create
     @record = @zone.records.build(safe_params)
-    @record.form_data = params.dig(:record, :form_data)
+    @record.form_data = params.dig(:record, :form_data)&.to_hash
     if @record.save
       redirect_to zone_path(@zone), :notice => "Record has been added successfully"
     else
@@ -26,7 +26,7 @@ class RecordsController < ApplicationController
   end
 
   def update
-    @record.form_data = params.dig(:record, :form_data)
+    @record.form_data = params.dig(:record, :form_data)&.to_hash
     if @record.update(safe_params)
       redirect_to zone_path(@zone), :notice => "Record has been updated successfully"
     else
