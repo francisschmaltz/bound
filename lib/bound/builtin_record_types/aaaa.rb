@@ -5,7 +5,6 @@ module Bound
     class AAAA < Bound::RecordType
 
       self.type_name = "AAAA"
-      self.type_description = "An IPv6 address for a host"
 
       def fields
         [

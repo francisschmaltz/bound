@@ -5,7 +5,6 @@ module Bound
     class MX < Bound::RecordType
 
       self.type_name = "MX"
-      self.type_description = "Details for a mail exchanger"
 
       def fields
         [

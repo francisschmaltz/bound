@@ -5,7 +5,6 @@ module Bound
     class TXT < Bound::RecordType
 
       self.type_name = "TXT"
-      self.type_description = "Text information associated with a name"
 
       def fields
         [

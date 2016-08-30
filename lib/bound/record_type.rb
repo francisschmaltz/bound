@@ -3,7 +3,6 @@ module Bound
 
     class << self
       attr_accessor :type_name
-      attr_accessor :type_description
 
       def all
         @all ||= ObjectSpace.each_object(Class).select { |klass| klass < self }.sort_by { |a| a.type_name }.each_with_object({}) do |type, hash|
