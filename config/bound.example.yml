@@ -33,4 +33,22 @@ smtp:
 
 web:
   protocol: http
-  host: localhost:5000
+  host: localhost:3000
+
+web_server:
+  bind_address: 0.0.0.0
+  port: 3000
+  max_threads: 5
+
+dns_defaults:
+  primary_ns: dns1.example.com
+  email_address: hostname@example.com
+  refresh_time: 3600
+  retry_time: 120
+  expiration_time: 2419200
+  max_cache: 600
+  ttl: 3600
+  nameservers:
+    - dns1.example.com.
+    - dns2.example.com.
+    - dns3.example.com.
