@@ -127,7 +127,7 @@ class Zone < ApplicationRecord
       temp_file = Tempfile.new
       File.open(temp_file.path, 'w') { |f| f.write(generate_zone_file) }
       command = "#{cmd} #{name} #{temp_file.path}"
-      stdout, stderr, status = Open3.capture3(cmd)
+      stdout, stderr, status = Open3.capture3(command)
       if status == 0
         nil
       else
