@@ -50,6 +50,8 @@ class Zone < ApplicationRecord
   default_value :max_cache, -> { Bound.config.dns_defaults.max_cache }
   default_value :ttl, -> { Bound.config.dns_defaults.ttl }
 
+  after_create :add_default_name_servers
+
   ATTRIBUTES_TO_TRACK = ['primary_ns', 'email_address', 'refresh_time', 'retry_time', 'expiration_time', 'max_cache', 'ttl']
   after_create { Change.create!(:zone => self, :event => "ZoneAdded", :name => self.name) }
   after_destroy { Change.create!(:zone => self, :event => "ZoneDeleted", :name => self.name) }
@@ -109,6 +111,14 @@ class Zone < ApplicationRecord
 
   def zone_file_path
     @zone_file_path ||= File.join(Bound::Publisher.zone_directory, "#{name}.zone")
+  end
+
+  def add_default_name_servers
+    if Bound.config.dns_defaults.nameservers.is_a?(Array)
+      Bound.config.dns_defaults.nameservers.each do |ns|
+        self.records.create!(:type => Bound::BuiltinRecordTypes::NS.to_s, :form_data => {'name' => ns})
+      end
+    end
   end
 
 end
