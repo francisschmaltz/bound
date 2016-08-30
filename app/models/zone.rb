@@ -122,4 +122,20 @@ class Zone < ApplicationRecord
     end
   end
 
+  def zone_file_errors
+    if cmd = Bound.config.bind.commands.check_zone_file
+      temp_file = Tempfile.new
+      File.open(temp_file.path, 'w') { |f| f.write(generate_zone_file) }
+      command = "#{cmd} #{name} #{temp_file.path}"
+      stdout, stderr, status = Open3.capture3(cmd)
+      if status == 0
+        nil
+      else
+        stdout.to_s.strip + stderr.to_s.strip
+      end
+    else
+      nil
+    end
+  end
+
 end

@@ -3,6 +3,7 @@ module Bound
 
     attr_accessor :zone_files_exported
     attr_accessor :zone_files_deleted
+    attr_accessor :zone_file_errors
     attr_accessor :configuration_check
     attr_accessor :configuration_errors
     attr_accessor :reload
@@ -10,6 +11,7 @@ module Bound
     def initialize
       @zone_files_exported = []
       @zone_files_deleted = []
+      @zone_file_errors = {}
 
       @configuration_check = nil
       @reload = nil

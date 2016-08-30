@@ -51,5 +51,14 @@
 
 .publishResult__configError {
   margin-bottom:25px;
+  white-space:pre;
+  overflow-x:auto;
+  background:#efefef;
+  border:1px solid #999;
+  padding:15px;
   font-size:12px;
+  b {
+    color:$blue;
+    font-weight:bold;
+  }
 }

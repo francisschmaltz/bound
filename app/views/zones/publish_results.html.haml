@@ -12,6 +12,9 @@
       - unless @result.success?
         - if @result.reload == false
           %p Failed to reload. Check the system logs for any issues with this.
+        - elsif @result.zone_file_errors
+          %p.u-margin The following zones had errors in their generated zone files. Please check the records for these zones and try again.
+          %pre.publishResult__configError~ @result.zone_file_errors.map { |zone, err| "<b>#{link_to(zone.name, zone)}</b><br>#{h err}\n".html_safe}.join("\n").html_safe
         - else
           %pre.publishResult__configError~ @result.configuration_errors
 

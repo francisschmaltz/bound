@@ -11,7 +11,7 @@ module Bound
 
     def initialize(options = {})
       @options = options
-      @zones = []
+      @zones = options[:all] ? Zone.all : Change.pending.includes(:zone).map(&:zone).uniq.compact
       @result = PublishResult.new
     end
 
@@ -20,6 +20,8 @@ module Bound
     attr_reader :zones
 
     def publish
+      validate_zone_files
+      return unless result.zone_file_errors.empty?
       export_zone_files
       remove_deleted_zones
       generate_zone_clauses
@@ -27,8 +29,19 @@ module Bound
       result
     end
 
+    def validate_zone_files
+      puts "Validating #{@zones.size} zone file(s)"
+      @zones.each do |zone|
+        if errors = zone.zone_file_errors
+          result.zone_file_errors[zone] = errors
+          puts "=> Zone file for #{zone.name} has errors".red
+        else
+          puts "=> Zone file for #{zone.name} is OK".green
+        end
+      end
+    end
+
     def export_zone_files
-      @zones = options[:all] ? Zone.all : Change.pending.includes(:zone).map(&:zone).uniq.compact
       puts "Exporting zones to #{self.class.zone_directory}"
       FileUtils.mkdir_p(self.class.zone_directory)
 
