@@ -17,3 +17,4 @@
 .byebug_history
 config/bound.yml
 data
+public/assets
