@@ -17,6 +17,7 @@ gem 'kaminari'
 gem 'hashie'
 gem 'dynamic_form'
 gem 'omniauth'
+gem 'foreman'
 
 require_relative './lib/bound/config'
 if Bound.yaml_config['auth'] && strategy = Bound.yaml_config['auth']['strategy']

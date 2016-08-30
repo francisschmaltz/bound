@@ -6,14 +6,16 @@ mysql:
   database: bound
 
 bind:
-  zone_export_path: data/zones
-  zone_clauses_file: data/zones.conf
+  zone_export_path: /etc/bind/zones
+  zone_clauses_file: /etc/bind/named.conf.zones
   commands:
-    reload: touch data/reloaded
-    check_config: echo
+    reload: /etc/init.d/bind9 reload
+    check_config: named-checkconf /etc/bind/named.conf
 
 rails:
-  environment: development
+  environment: production
+  # Replace this key with a new random key. You can generate one using
+  # `bundle exec rake secret` from the root of the application
   secret_key: ad1a6538c2b3cb4f231fad413898ce6144712232b24676d13879eb8704c61fe23b5f8e41e7a519498a8c78c2a95875412052f76e202bf6af9e7394a13d1eb8f8
 
 auth:
@@ -31,4 +33,4 @@ smtp:
 
 web:
   protocol: http
-  host: localhost:3000
+  host: localhost:5000
