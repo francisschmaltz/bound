@@ -68,15 +68,15 @@ class Zone < ApplicationRecord
 
   def generate_zone_file_header
     String.new.tap do |s|
-      s << "# Zone file exported from Bound at #{Time.now.utc.to_s}\n"
-      s << "# Bound Zone ID: #{id}\n\n"
+      s << "; Zone file exported from Bound at #{Time.now.utc.to_s}\n"
+      s << "; Bound Zone ID: #{id}\n\n"
       s << "$TTL".ljust(ZF_NAME_SPACE, ' ') + " #{self.ttl}\n"
       s << "$ORIGIN".ljust(ZF_NAME_SPACE, ' ') + " #{self.name}\n\n"
       s << "@".ljust(ZF_NAME_SPACE, ' ') + " "
       s << "IN".ljust(ZF_CLASS_SPACE, ' ')
       s << "SOA".ljust(ZF_TYPE_SPACE, ' ') + " "
-      s << self.primary_ns + " "
-      s << self.email_address.to_s.gsub('@', '.') + " "
+      s << self.primary_ns + ". "
+      s << self.email_address.to_s.gsub('@', '.') + ". "
       s << "("
       s << self.serial.to_s + " "
       s << self.refresh_time.to_s + " "
@@ -116,6 +116,7 @@ class Zone < ApplicationRecord
   def add_default_name_servers
     if Bound.config.dns_defaults.nameservers.is_a?(Array)
       Bound.config.dns_defaults.nameservers.each do |ns|
+        ns = ns.to_s + "." unless ns.ends_with?('.')
         self.records.create!(:type => Bound::BuiltinRecordTypes::NS.to_s, :form_data => {'name' => ns})
       end
     end
