@@ -20,9 +20,9 @@
       - else
         - for record in @records
           %tr
-            %td= link_to record.name || "@", edit_zone_record_path(@zone, record), :class => "u-link"
+            %td.dataTable__wrapCell= link_to record.name || "@", edit_zone_record_path(@zone, record), :class => "u-link"
             %td= record.ttl
             %td.u-center= record_type_tag record.type
-            %td= record.data
+            %td.dataTable__wrapCell= record.data
 
   %p.u-align-right= link_to "View raw zone file", zone_file_zone_path(@zone), :class => 'u-subLink', :target => '_blank'

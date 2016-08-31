@@ -1,6 +1,7 @@
 .dataTable {
   width:100%;
   font-size:14px;
+  table-layout:fixed;
   td {
     border-bottom:1px solid #ddd;
     padding:8px 10px;
@@ -22,6 +23,10 @@
     padding:40px 0;
     color:#999;
     font-style:italic;
+  }
+
+  .dataTable__wrapCell {
+    word-wrap:break-word;
   }
 }
 
