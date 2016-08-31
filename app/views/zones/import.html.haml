@@ -1,0 +1,36 @@
+- @page_title = "Import - #{@zone.name}"
+.page__header Import Records to #{@zone.name}
+.page__content
+  = form_tag do
+    - if @import.records.empty?
+      %p.u-margin.u-text
+        Paste the records (from a zone file) that you wish to import below. If there are any errors
+        importing the file an error will be displayed.
+      %p.u-margin= text_area_tag 'records', params[:records], :class => 'textInput textInput--longArea'
+      %p= submit_tag "Preview Records", :class => 'button'
+    - else
+
+      %p.u-margin.u-text
+        These are the records which have been detected from the records you have provided. To go ahead and add these
+        records just press the button below. Records shown with red errors will not be imported and records which match
+        these exactly will be skipped.
+      %table.dataTable.u-margin
+        %thead
+          %tr
+            %td{:width => "35%"} Name
+            %td{:width => "15%"} Type
+            %td{:width => "50%"} Data
+        %tbody
+          - for record in @import.records
+            %tr
+              %td= record.name
+              %td= record.type&.type
+              %td
+                = record.data
+                - unless record.valid?
+                  %ul.standardList.u-red
+                    - for error in record.errors.full_messages
+                      %li= error
+
+      %p= submit_tag "Import Records", :name => 'import', :class => 'button'
+      ~ hidden_field_tag 'records', params[:records]

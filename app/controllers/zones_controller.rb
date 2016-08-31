@@ -51,6 +51,14 @@ class ZonesController < ApplicationController
     end
   end
 
+  def import
+    @import = Bound::Import.new(@zone, params[:records])
+    if params[:import].present?
+      imported_records = @import.import
+      redirect_to @zone, :notice => "Imported #{imported_records.size} of #{@import.records.size} record(s)"
+    end
+  end
+
   private
 
   def safe_params

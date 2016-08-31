@@ -20,16 +20,12 @@ module Bound
         end
       end
 
-      def prepare_for_bind(value)
-        '"' + value.to_s + '"'
-      end
-
       def serialize(hash)
-        hash['data']
+        '"' + hash['data'] + '"'
       end
 
       def deserialize(string)
-        {'data' => string}
+        {'data' => string.gsub(/\A\"/, '').gsub(/\"\z/, '')}
       end
 
     end

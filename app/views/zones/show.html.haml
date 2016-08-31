@@ -2,8 +2,9 @@
 .page__header
   = @zone.name
   .page__headerButton
-    = link_to "Add new record", new_zone_record_path(@zone), :class => 'button'
-    = link_to "Edit zone", edit_zone_path(@zone), :class => 'button'
+    = link_to "Add Record", new_zone_record_path(@zone), :class => 'button'
+    = link_to "Import", import_zone_path(@zone), :class => 'button'
+    = link_to "Edit", edit_zone_path(@zone), :class => 'button'
 .page__content
   %table.dataTable.u-margin
     %thead

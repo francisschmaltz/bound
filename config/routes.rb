@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   resources :zones do
     get :zone_file, :on => :member
+    match :import, :on => :member, :via => [:get, :post]
     resources :records
   end
   resources :users

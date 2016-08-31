@@ -23,6 +23,8 @@ class Record < ApplicationRecord
   validates :ttl, :numericality => {:only_integer => true, :allow_blank => true}
   validate :validate_data
 
+  before_validation { self.name = nil if self.name.to_s == "@" }
+
   before_save :serialize_form_data
 
   ATTRIBUTES_TO_TRACK = ['ttl']
