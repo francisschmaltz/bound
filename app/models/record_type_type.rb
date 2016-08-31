@@ -1,10 +1,10 @@
 class RecordTypeType < ActiveModel::Type::Value
 
   def cast(value)
-    if value = Bound::RecordType.all[value]
-      value
+    if type = Bound::RecordType.all[value]
+      type
     else
-      raise "Invalid type '#{value}'"
+      value
     end
   end
 

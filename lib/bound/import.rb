@@ -24,10 +24,14 @@ module Bound
               parts.shift # remove the next IN
             end
             imported_type = parts.shift.to_s.upcase
+            data = parts.join(' ')
             if type = Bound::RecordType.all.values.find { |type| type.type == imported_type }
               record.type = type.class.to_s
-              record.form_data = record.type.deserialize(parts.join(' '))
+              record.form_data = record.type.deserialize(data)
               record.serialize_form_data
+            else
+              record.type = imported_type
+              record.data = data
             end
             record.validate
             array << record

@@ -1,8 +1,10 @@
 module ApplicationHelper
 
   def record_type_tag(type)
-    if type
+    if type.is_a?(Bound::RecordType)
       content_tag :span, type.type, :class => "recordTypeTag", :style => "background-color:##{type.class.color || '333'};"
+    else
+      type
     end
   end
 
