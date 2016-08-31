@@ -7,7 +7,7 @@ class ZonesController < ApplicationController
   end
 
   def show
-    @records = @zone.records.order(:name, :type, :data).to_a
+    @records = @zone.records.order(:type, :name, :data).to_a
   end
 
   def zone_file
