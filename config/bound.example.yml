@@ -12,6 +12,26 @@ bind:
     reload: /etc/init.d/bind9 reload
     check_config: named-checkconf /etc/bind/named.conf
 
+# Uncomment this section if you'd like Bound to copy zone files to alternative hosts.
+#
+# replication:
+#   # This is the IP addresses for the master server where slaves are able to
+#   # request zone configuration. This information is included in the zone clauses
+#   # that is pushed to slaves.
+#   masters:
+#     - 185.22.208.2
+#
+#   # These are the slaves that should receive a copy of the zone file and reloaded
+#   # then configuration is changed. Configuration is pushed to slaves using SSH
+#   # and should be secured with an SSH key for the user that is running Bound.
+#   slaves:
+#     -
+#       ip_address: 185.22.208.3
+#       username: root
+#       ssh_port: 22
+#       zone_file_path: /etc/bind9/named.conf.zones
+#       reload_command: service bind9 restart
+
 rails:
   environment: production
   # Replace this key with a new random key. You can generate one using

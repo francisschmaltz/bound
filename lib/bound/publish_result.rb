@@ -7,11 +7,13 @@ module Bound
     attr_accessor :configuration_check
     attr_accessor :configuration_errors
     attr_accessor :reload
+    attr_accessor :slaves
 
     def initialize
       @zone_files_exported = []
       @zone_files_deleted = []
       @zone_file_errors = {}
+      @slaves = {}
 
       @configuration_check = nil
       @reload = nil

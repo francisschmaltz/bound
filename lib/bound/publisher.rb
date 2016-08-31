@@ -25,8 +25,9 @@ module Bound
       export_zone_files
       remove_deleted_zones
       generate_zone_clauses
-      check_configuration && reload_configuration && mark_as_published
-      result
+      if check_configuration && reload_configuration && mark_as_published
+        copy_zone_clauses_to_slaves
+      end
     end
 
     def validate_zone_files
@@ -125,6 +126,41 @@ module Bound
         zone.mark_as_published(time)
       end
       Change.pending.update_all(:published_at => time)
+    end
+
+    def copy_zone_clauses_to_slaves
+      return unless Bound.config.replication
+      puts "Copying zone clauses to slaves"
+      clauses = Zone.all.map(&:generate_zone_clause_for_slave).join("\n") + "\n"
+      sha = Digest::SHA1.hexdigest(clauses)
+      for slave in Bound.config.replication.slaves
+        puts "=> Publishing to #{slave.ip_address}"
+        ssh = Nissh::Session.new(slave.ip_address, slave.username)
+
+        # Check to see if we need a new zone file if we're not doing a force
+        unless @options[:all]
+          cmd_result = ssh.execute!("sha1sum #{slave.zone_file_path}")
+          if cmd_result.success? && cmd_result.stdout =~ /\A#{sha}\s+/
+            puts "   No zone file needed for this slave.".blue
+            result.slaves[slave.ip_address] = {:success => nil, :text => "No zone file changes needed"}
+            next
+          end
+        end
+
+        # Upload a new file
+        ssh.session.sftp.file.open(slave.zone_file_path, 'w') { |f| f.write(clauses) }
+        puts "   Uploaded new zone file to #{slave.zone_file_path}".green
+
+        # Reload configuration
+        cmd_result = ssh.execute!(slave.reload_command)
+        if cmd_result.success?
+          puts "   Reloaded BIND on slave".green
+          result.slaves[slave.ip_address] = {:success => true, :text => "reloaded successfully"}
+        else
+          puts "   Couldn't reload configuration. Check result.".red
+          result.slaves[slave.ip_address] = {:success => false, :text => cmd_result.output}
+        end
+      end
     end
 
   end

@@ -104,6 +104,21 @@ class Zone < ApplicationRecord
     end
   end
 
+  def generate_zone_clause_for_slave
+    return false unless Bound.config.replication
+    String.new.tap do |s|
+      s << "zone \"#{name}\" {\n"
+      s << "  type slave;\n"
+      s << "  file \"/var/lib/bind/#{name}\";\n"
+      s << "  masters {\n"
+      for master in Bound.config.replication.masters
+        s << "    #{master};\n"
+      end
+      s << "  };\n"
+      s << "};"
+    end
+  end
+
   def mark_as_published(time = Time.now)
     self.pending_changes.update_all(:published_at => time, :serial => self.serial)
     update_columns(:published_at => time, :serial => self.serial + 1)

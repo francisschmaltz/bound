@@ -89,11 +89,16 @@ GEM
     multi_xml (0.5.5)
     multipart-post (2.0.0)
     mysql2 (0.4.4)
+    net-sftp (2.1.2)
+      net-ssh (>= 2.6.5)
+    net-ssh (3.2.0)
     nifty-utils (1.1.7)
     nilify_blanks (1.2.1)
       activerecord (>= 3.0.0)
       activesupport (>= 3.0.0)
     nio4r (1.2.1)
+    nissh (1.0.0)
+      net-ssh (>= 2)
     nokogiri (1.6.8)
       mini_portile2 (~> 2.1.0)
       pkg-config (~> 1.1.7)
@@ -185,8 +190,10 @@ DEPENDENCIES
   jquery-rails
   kaminari
   mysql2 (>= 0.3.18, < 0.5)
+  net-sftp
   nifty-utils
   nilify_blanks
+  nissh
   omniauth
   omniauth-atech
   puma (~> 3.0)

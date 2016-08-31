@@ -18,6 +18,8 @@ gem 'hashie'
 gem 'dynamic_form'
 gem 'omniauth'
 gem 'foreman'
+gem 'nissh'
+gem 'net-sftp', :require => 'net/sftp'
 
 require_relative './lib/bound/config'
 if Bound.yaml_config['auth'] && strategy = Bound.yaml_config['auth']['strategy']

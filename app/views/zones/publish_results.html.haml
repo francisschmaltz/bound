@@ -18,6 +18,17 @@
         - else
           %pre.publishResult__configError~ @result.configuration_errors
 
+
+
+      - if Bound.config.replication
+        .publishResult__list
+          %h2.publishResult__subTitle Slaves updates
+          %ul.publishResult__fileList
+            - for slave, result in @result.slaves
+              %li{:class => result[:success] == false ? 'u-red' : ''}
+                %b #{slave}:
+                = result[:text]
+
       .publishResult__list
         %h2.publishResult__subTitle Zone files exported
         - if @result.zone_files_exported.empty?
