@@ -22,14 +22,16 @@
       %table.dataTable.u-margin
         %thead
           %tr
-            %td{:width => "35%"} Name
-            %td{:width => "15%"} Type
-            %td{:width => "50%"} Data
+            %td{:width => "10%"} Type
+            %td{:width => "27%"} Name
+            %td{:width => "10%"} TTL
+            %td{:width => "53%"} Data
         %tbody
           - for record in @import.records
             %tr
-              %td.dataTable__wrapCell= record.name
               %td= record_type_tag record.type
+              %td.dataTable__wrapCell= record.name
+              %td= record.ttl
               %td.dataTable__wrapCell
                 = record.data
                 - unless record.valid?
