@@ -100,6 +100,9 @@ class Zone < ApplicationRecord
       s << "zone \"#{name}\" {\n"
       s << "  type master;\n"
       s << "  file \"#{zone_file_path}\";\n"
+      if notify = Bound.config.replication&.notify&.master
+        s << "  notify #{notify};\n"
+      end
       s << "};"
     end
   end
@@ -110,6 +113,9 @@ class Zone < ApplicationRecord
       s << "zone \"#{name}\" {\n"
       s << "  type slave;\n"
       s << "  file \"/var/lib/bind/#{name}\";\n"
+      if notify = Bound.config.replication&.notify&.slave
+        s << "  notify #{notify};\n"
+      end
       s << "  masters {\n"
       for master in Bound.config.replication.masters
         s << "    #{master};\n"

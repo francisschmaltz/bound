@@ -21,6 +21,14 @@ bind:
 #   masters:
 #     - 185.22.208.2
 #
+#   # Defines who should receive notifications sent by the master. If 'yes',
+#   # the NS records for the zone will be notified, if 'explicit' only those which
+#   # are configured as 'also-notify' and if 'no' nothing will be notified. This
+#   # can be configured for the master and the slave zone clauses independently.
+#   notify:
+#     master: "yes"
+#     slave: "no"
+#
 #   # These are the slaves that should receive a copy of the zone file and reloaded
 #   # then configuration is changed. Configuration is pushed to slaves using SSH
 #   # and should be secured with an SSH key for the user that is running Bound.
