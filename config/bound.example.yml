@@ -36,6 +36,7 @@ bind:
 #     -
 #       ip_address: 185.22.208.3
 #       username: root
+#       key_path: /root/.ssh/id_rsa
 #       ssh_port: 22
 #       zone_file_path: /etc/bind9/named.conf.zones
 #       reload_command: service bind9 restart
