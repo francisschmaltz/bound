@@ -4,7 +4,7 @@
   - if @changes.empty?
     %p.u-margin There are currently no changes pending. Use the button below to reload all configuration.
   - else
-    %p.u-margin The follow changes are currently pending and will be applied when you press the button below.
+    %p.u-margin= link_to "Apply these changes", publish_path, :method => :post, :class => "button"
     %ul.changeList.u-margin
       - for change in @changes
         %li.changeList__item{:class => "changeList__item--#{change.event}"}
