@@ -18,7 +18,6 @@ class Record < ApplicationRecord
 
   belongs_to :zone, :touch => true
 
-  validates :name, :hostname => true
   validates :type, :presence => true
   validates :ttl, :numericality => {:only_integer => true, :allow_blank => true}
   validate :validate_data
