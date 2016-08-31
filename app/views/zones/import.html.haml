@@ -7,7 +7,10 @@
         Paste the records (from a zone file) that you wish to import below. If there are any errors
         importing the file an error will be displayed.
       %p.u-margin= text_area_tag 'records', params[:records], :class => 'textInput textInput--longArea'
-      %p= submit_tag "Preview Records", :class => 'button'
+      %p
+        = submit_tag "Preview Records", :class => 'button'
+        or
+        = link_to "go back to zone", @zone, :class => "u-link"
     - else
 
       %p.u-margin.u-text
@@ -34,5 +37,8 @@
                     - for error in record.errors.full_messages
                       %li= error
 
-      %p= submit_tag "Import Records", :name => 'import', :class => 'button'
+      %p
+        = submit_tag "Import Records", :name => 'import', :class => 'button'
+        or
+        = link_to "go back to zone", @zone, :class => "u-link"
       ~ hidden_field_tag 'records', params[:records]
