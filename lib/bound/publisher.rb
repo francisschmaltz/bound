@@ -135,7 +135,7 @@ module Bound
       sha = Digest::SHA1.hexdigest(clauses)
       for slave in Bound.config.replication.slaves
         puts "=> Publishing to #{slave.ip_address}"
-        ssh = Nissh::Session.new(slave.ip_address, slave.username, :keys => [slave.key_path])
+        ssh = Nissh::Session.new(slave.ip_address, slave.username, :keys => slave.key_path ? [slave.key_path] : [])
 
         # Check to see if we need a new zone file if we're not doing a force
         unless @options[:all]
