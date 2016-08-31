@@ -1,5 +1,9 @@
 module ApplicationHelper
 
+  def record_type_tag(type)
+    content_tag :span, type.type, :class => "recordTypeTag", :style => "background-color:##{type.class.color || '333'};"
+  end
+
   def record_type_field_tag(record, type, field)
     field_name = "record[form_data][#{field[:name]}]"
     value = @record.form_data.is_a?(Hash) ? @record.form_data[field[:name].to_s] : nil

@@ -5,6 +5,7 @@ module Bound
     class CNAME < Bound::RecordType
 
       self.type_name = "CNAME"
+      self.color = 'f1ad3b'
 
       def fields
         [

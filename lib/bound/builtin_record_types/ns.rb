@@ -5,6 +5,7 @@ module Bound
     class NS < Bound::RecordType
 
       self.type_name = "NS"
+      self.color = '969696'
 
       def fields
         [

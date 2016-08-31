@@ -5,6 +5,7 @@ module Bound
     class SRV < Bound::RecordType
 
       self.type_name = "SRV"
+      self.color = 'df2b6b'
 
       def fields
         [

@@ -11,7 +11,7 @@
       %tr
         %td{:width => "25%"} Name
         %td{:width => "10%"} TTL
-        %td{:width => "12%"} Type
+        %td.u-center{:width => "12%"} Type
         %td{:width => "53%"} Data
     %tbody
       - if @records.empty?
@@ -22,7 +22,7 @@
           %tr
             %td= link_to record.name || "@", edit_zone_record_path(@zone, record), :class => "u-link"
             %td= record.ttl
-            %td= record.type.type
+            %td.u-center= record_type_tag record.type
             %td= record.data
 
   %p.u-align-right= link_to "View raw zone file", zone_file_zone_path(@zone), :class => 'u-subLink', :target => '_blank'

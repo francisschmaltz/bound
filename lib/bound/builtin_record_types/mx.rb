@@ -5,6 +5,7 @@ module Bound
     class MX < Bound::RecordType
 
       self.type_name = "MX"
+      self.color = '805dd3'
 
       def fields
         [
