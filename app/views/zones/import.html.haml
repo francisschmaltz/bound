@@ -6,7 +6,7 @@
       %p.u-margin.u-text
         Paste the records (from a zone file) that you wish to import below. If there are any errors
         importing the file an error will be displayed.
-      %p.u-margin= text_area_tag 'records', params[:records], :class => 'textInput textInput--longArea'
+      %p.u-margin= text_area_tag 'records', params[:records], :class => 'textInput textInput--longArea', :autofocus => true
       %p
         = submit_tag "Preview Records", :class => 'button'
         or
