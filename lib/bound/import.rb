@@ -11,10 +11,10 @@ module Bound
         if @zone_file.blank?
           []
         else
-          @zone_file.gsub(/\r/, '').strip.split(/\n/).each_with_object([]) do |line, array|
+          @zone_file.gsub(/\r/, '').strip.split(/\n/).map(&:strip).each_with_object([]) do |line, array|
             next if line.starts_with?(';')
             next if line.blank?
-            parts = line.strip.split(/\s+/)
+            parts = line.split(/\s+/)
             record = Record.new(:zone => @zone)
             record.name = parts.shift
 
@@ -37,14 +37,20 @@ module Bound
     end
 
     def import
+      stats = {:total => records.size, :imported => 0, :duplicates => 0, :errored => 0}
       records.each_with_object([]) do |record, imported|
-        next unless record.valid?
-        unless @zone.records.where(:name => record.name, :type => record.type, :data => record.data).exists?
-          if record.save!
+        if @zone.records.where(:name => record.name, :type => record.type, :data => record.data).exists?
+          stats[:duplicates] += 1
+        else
+          if record.save
+            stats[:imported] += 1
             imported << record
+          else
+            stats[:errored] += 1
           end
         end
       end
+      stats
     end
 
   end

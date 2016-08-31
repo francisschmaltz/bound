@@ -14,6 +14,8 @@
         These are the records which have been detected from the records you have provided. To go ahead and add these
         records just press the button below. Records shown with red errors will not be imported and records which match
         these exactly will be skipped.
+      %p.u-margin.u-bold
+        Found #{pluralize @import.records.size, 'record'} to import
       %table.dataTable.u-margin
         %thead
           %tr
@@ -23,9 +25,9 @@
         %tbody
           - for record in @import.records
             %tr
-              %td= record.name
-              %td= record.type&.type
-              %td
+              %td.dataTable__wrapCell= record.name
+              %td= record_type_tag record.type
+              %td.dataTable__wrapCell
                 = record.data
                 - unless record.valid?
                   %ul.standardList.u-red

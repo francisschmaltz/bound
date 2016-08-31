@@ -7,7 +7,7 @@ class ZonesController < ApplicationController
   end
 
   def show
-    @records = @zone.records.order(:name, :type).to_a
+    @records = @zone.records.order(:name, :type, :data).to_a
   end
 
   def zone_file
@@ -54,8 +54,8 @@ class ZonesController < ApplicationController
   def import
     @import = Bound::Import.new(@zone, params[:records])
     if params[:import].present?
-      imported_records = @import.import
-      redirect_to @zone, :notice => "Imported #{imported_records.size} of #{@import.records.size} record(s)"
+      stats = @import.import
+      redirect_to @zone, :notice => "Imported #{stats[:imported]} of #{stats[:total]} (#{stats[:duplicates]} duplicates, #{stats[:errored]} errored)"
     end
   end
 
