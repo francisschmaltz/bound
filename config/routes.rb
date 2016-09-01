@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   get 'login' => 'authentication#login'
   get 'auth/:provider/callback' => 'authentication#callback'
   get 'join/:invite_token' => 'authentication#join', :as => 'join'
-  delete 'logout' => 'authentication#logout'
+  match 'logout' => 'authentication#logout', :via => [:get, :delete]
 
   resources :zones do
     get :zone_file, :on => :member

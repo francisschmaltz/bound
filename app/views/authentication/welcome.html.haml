@@ -1,0 +1,7 @@
+- @page_title = "Login"
+.page__header Welcome
+.page__content
+  %p.u-margin
+    There are no users for your system yet. When you click the button below you'll be directed to
+    #{Bound.config.auth.description} and the user you login with will be created as the first user.
+  %p= link_to "Login using #{Bound.config.auth.description}", "/auth/#{Bound.config.auth.strategy}", :class => 'button'

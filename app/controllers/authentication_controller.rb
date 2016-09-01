@@ -1,8 +1,13 @@
 class AuthenticationController < ApplicationController
 
-  skip_before_filter :login_required, :only => [:login, :callback, :join]
+  skip_before_filter :login_required, :only => [:login, :callback, :join, :logout]
 
   def login
+    if User.count > 0
+      redirect_to "/auth/#{Bound.config.auth.strategy}"
+    else
+      render 'welcome'
+    end
   end
 
   def callback
@@ -24,9 +29,11 @@ class AuthenticationController < ApplicationController
   end
 
   def logout
-    auth_session.invalidate! if logged_in?
-    reset_session
-    redirect_to login_path, :notice => "You have been logged out successfully"
+    if request.delete?
+      auth_session.invalidate! if logged_in?
+      reset_session
+      redirect_to logout_path
+    end
   end
 
   def join
@@ -38,7 +45,7 @@ class AuthenticationController < ApplicationController
 
   def do_login(user, options = {})
     self.current_user = user
-    flash[:notice] = options[:flash] || "You have been logged in as #{user.name}"
+    flash[:notice] = options[:flash] || "You have been logged in as #{user.name} using #{Bound.config.auth.description}"
     redirect_to root_path
   end
 

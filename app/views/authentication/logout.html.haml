@@ -1,0 +1,6 @@
+- @page_title = "Login"
+.page__header You've been logged out
+.page__content
+  %p.u-margin
+    %p.u-margin You've been logged out of Bound. You can now navigate away from this page.
+    %p= link_to "Login again", "/auth/#{Bound.config.auth.strategy}", :class => 'button'
