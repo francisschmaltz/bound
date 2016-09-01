@@ -25,13 +25,6 @@ controller :zones do
 
   shared_action :properties do
     from_structure :zone do
-      param :primary_ns, :default => Bound.config.dns_defaults.primary_ns
-      param :email_address, :default => Bound.config.dns_defaults.email_address
-      param :refresh_time, :default => Bound.config.dns_defaults.refresh_time
-      param :retry_time, :default => Bound.config.dns_defaults.retry_time
-      param :expiration_time, :default => Bound.config.dns_defaults.expiration_time
-      param :max_cache, :default => Bound.config.dns_defaults.max_cache
-      param :ttl, :default => Bound.config.dns_defaults.ttl
     end
   end
 
@@ -40,13 +33,20 @@ controller :zones do
     description "This action will create a new zone"
     from_structure :zone do
       param :name, :required => true
+      param :primary_ns, :default => Bound.config.dns_defaults.primary_ns
+      param :email_address, :default => Bound.config.dns_defaults.email_address
+      param :refresh_time, :default => Bound.config.dns_defaults.refresh_time
+      param :retry_time, :default => Bound.config.dns_defaults.retry_time
+      param :expiration_time, :default => Bound.config.dns_defaults.expiration_time
+      param :max_cache, :default => Bound.config.dns_defaults.max_cache
+      param :ttl, :default => Bound.config.dns_defaults.ttl
     end
     use :properties
     returns Hash, :structure => :zone, :structure_opts => {:full => true}
     use :validation_error
     action do
       zone = Zone.new
-      copy_params_to zone, :from => :properties
+      copy_params_to zone, :name, :primary_ns, :email_address, :refresh_time, :retry_time, :expiration_time, :max_cache, :ttl
       zone.save!
       structure zone, :return => true
     end
@@ -56,11 +56,20 @@ controller :zones do
     title "Update a zone"
     description "This action will update the properties for a zone"
     use :find_zone
-    use :properties
+    from_structure :zone do
+      param :name
+      param :primary_ns
+      param :email_address
+      param :refresh_time
+      param :retry_time
+      param :expiration_time
+      param :max_cache
+      param :ttl
+    end
     returns Hash, :structure => :zone, :structure_opts => {:full => true}
     use :validation_error
     action do
-      copy_params_to @zone, :from => :properties
+      copy_params_to @zone, :name, :primary_ns, :email_address, :refresh_time, :retry_time, :expiration_time, :max_cache, :ttl
       @zone.save!
       structure @zone, :return => true
     end
