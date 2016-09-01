@@ -7,7 +7,9 @@
     - for zone in @zones
       %li
         = link_to zone, :class => 'zoneList__item' do
-          = zone.name
+          = zone.description
+          - if zone.reverse?
+            %span.zoneList__reverse Reverse
           .zoneList__itemUpdated
             - if zone.changes_pending?
               %span.zoneList__hasChanges Pending

@@ -40,6 +40,7 @@ class Zone < ApplicationRecord
   validates :expiration_time, :numericality => {:only_integer => true}
   validates :max_cache, :numericality => {:only_integer => true}
   validates :ttl, :numericality => {:only_integer => true}
+  validate :validate_reverse_zone_name
 
   default_value :serial, -> { 1 }
   default_value :primary_ns, -> { Bound.config.dns_defaults.primary_ns }
@@ -59,6 +60,49 @@ class Zone < ApplicationRecord
     for key, (old_value, new_value) in self.changes
       next unless ATTRIBUTES_TO_TRACK.include?(key.to_s)
       Change.create!(:zone => self, :event => "ZoneAttributeChanged", :name => self.name, :attribute_name => key, :old_value => old_value, :new_value => new_value)
+    end
+  end
+
+  def description
+    reverse? ? reverse_subnet.to_s : name
+  end
+
+  def ordered_records
+    reverse_version == 4 ? records.order("CAST(name as SIGNED INTEGER), type, data") : records.order(:name, :type, :data)
+  end
+
+  def reverse_version
+    @reverse_version ||= begin
+      if name =~ /(in\-addr|ip6)\.arpa\z/
+        $1 == "ip6" ? 6: 4
+      else
+        0
+      end
+    end
+  end
+
+  def reverse?
+    reverse_version > 0
+  end
+
+  def reverse_subnet
+    return nil unless reverse?
+    @reverse_subnet ||= begin
+      address = self.name.gsub(/\.(in\-addr|ip6)\.arpa\z/, '')
+      if reverse_version == 4
+        IPAddr.new(address.split('.').map(&:to_i).reverse.join(".") + ".0")
+      else
+        IPAddr.new(address.split('.').reverse.join.gsub(/(.{4})/, '\1:') + ":")
+      end
+    end
+  end
+
+  def validate_reverse_zone_name
+    if self.name.present? && reverse?
+      subnet = self.reverse_subnet rescue nil
+      if subnet.nil?
+        errors.add :name, "is not a valid reverse zone name"
+      end
     end
   end
 
