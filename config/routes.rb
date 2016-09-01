@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :records
   end
   resources :users
+  resources :api_tokens
 
   match 'publish' => 'zones#publish', :via => [:get, :post]
 
