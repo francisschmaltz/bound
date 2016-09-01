@@ -21,6 +21,7 @@ class Record < ApplicationRecord
   validates :type, :presence => true
   validates :ttl, :numericality => {:only_integer => true, :allow_blank => true}
   validate :validate_data
+  validate :validate_type
 
   before_validation { self.name = nil if self.name.to_s == "@" }
 
@@ -45,7 +46,7 @@ class Record < ApplicationRecord
   end
 
   def form_data
-    @form_data ||= type ? type.deserialize(data) : nil
+    @form_data ||= type.is_a?(Bound::RecordType) ? type.deserialize(data) : nil
   end
 
   def form_data=(value)
@@ -54,7 +55,7 @@ class Record < ApplicationRecord
 
   def serialize_form_data
     if @form_data
-      self.data = type ? type.serialize(@form_data) : nil
+      self.data = type.is_a?(Bound::RecordType) ? type.serialize(@form_data) : nil
     end
   end
 
@@ -89,12 +90,18 @@ class Record < ApplicationRecord
   end
 
   def validate_data
-    if self.type && @form_data
+    if self.type.is_a?(Bound::RecordType) && @form_data
       type_errors = []
       self.type.validate(@form_data, type_errors)
       type_errors.each do |error|
         self.errors.add :base, error
       end
+    end
+  end
+
+  def validate_type
+    unless self.type.is_a?(Bound::RecordType)
+      errors.add :type, "is not valid"
     end
   end
 
