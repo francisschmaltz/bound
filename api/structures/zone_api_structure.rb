@@ -13,4 +13,11 @@ structure :zone do
   full :ttl, "The default TTL for records within the zone", :type => Integer, :eg => 3600
   full :published_at, "The time this zone was last published", :type => :timestamp
   full :created_at, "The time this zone was created", :type => :timestamp
+  full :reverse?, "Is this a reverse zone", :type => :boolean
+  full :reverse_version, "What type of subnet is this a reverse zone for?", :type => Integer
+  full :reverse_subnet, "What's the subnet for the zone?", :type => String, :value => proc { o.reverse_subnet&.to_s }
+
+  expansion :pending_changes, "The number of pending changes", :type => Integer do
+    o.pending_changes.size
+  end
 end
