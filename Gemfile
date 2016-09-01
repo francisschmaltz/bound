@@ -20,6 +20,7 @@ gem 'omniauth'
 gem 'foreman'
 gem 'nissh'
 gem 'net-sftp', :require => 'net/sftp'
+gem 'moonrope'
 
 require_relative './lib/bound/config'
 if Bound.yaml_config['auth'] && strategy = Bound.yaml_config['auth']['strategy']
