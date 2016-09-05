@@ -1,5 +1,7 @@
 class APITokensController < ApplicationController
 
+  before_action { @active_nav = :tokens }
+
   def index
     @api_tokens = APIToken.order(:name).to_a
   end

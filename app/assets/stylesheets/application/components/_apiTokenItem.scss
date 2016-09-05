@@ -1,0 +1,13 @@
+.apiTokenItem {
+  align-items: center;
+  display: flex;
+}
+
+.apiTokenItem__action {
+  flex: 0 0 auto;
+  margin: 0 0 0 16px;
+}
+
+.apiTokenItem__content {
+  flex: 1 1 auto;
+}

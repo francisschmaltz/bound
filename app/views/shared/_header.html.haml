@@ -1,0 +1,18 @@
+.header
+  .container.header__container
+    .header__content
+      - if breadcrumbs.any?
+        %ul.header__crumbs
+          - breadcrumbs.each do |breadcrumb|
+            - breadcrumb.push :class => "header__crumbLink"
+            %li.header__crumb
+              = link_to *breadcrumb
+      %h1.header__title
+        = title
+    - if header_actions.any?
+      %ul.header__actions
+        - header_actions.each do |text, path, options|
+          - color = options.delete(:color)
+          - options.reverse_merge!(:class => ["button", ("button--#{color}")])
+          %li.header__action
+            = link_to text, path, options

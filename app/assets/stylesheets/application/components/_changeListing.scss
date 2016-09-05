@@ -1,0 +1,38 @@
+.changeListing {
+  align-items: flex-start;
+  margin: 0 0 0 4px;
+  display: flex;
+}
+
+.changeListing--generic {
+  box-shadow: -4px 0 0 $blue;
+}
+
+.changeListing--recordAdded,
+.changeListing--zoneAdded {
+  box-shadow: -4px 0 0 $green;
+}
+
+.changeListing--recordDataChanged,
+.changeListing--zoneAttributeChanged {
+  box-shadow: -4px 0 0 $blue;
+}
+
+.changeListing--recordDeleted,
+.changeListing--zoneDeleted {
+  box-shadow: -4px 0 0 $red;
+}
+
+.changeListing_desc {
+  flex: 1 1 auto;
+  margin: 0 12px 0 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.changeListing__timestamp {
+  color: $gray-darkest;
+  flex: 0 0 auto;
+  font-size: 14px;
+  white-space: nowrap;
+}

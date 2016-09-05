@@ -1,45 +1,63 @@
 .button {
-  display:inline-block;
-  font:inherit;
-  appearance:none;
-  text-decoration:none !important;
-  background:#128efb;
-  color:#fff;
-  font-size:13px;
-  padding:5px 13px;
-  border:2px solid darken(#128efb, 20%);
-  &:active {
-    background-color:darken(#128efb, 15%);
-  }
+  -webkit-appearance: none;
+  background: $black;
+  border: 0;
+  border-radius: 2px;
+  color: $white;
+  cursor: pointer;
+  display: inline-block;
+  font: inherit;
+  font-weight: 700;
+  padding: 8px 12px;
+  white-space: nowrap;
 }
 
-.button--green {
-  background-color:#49cf89;
-  border-color:darken(#49cf89, 15%);
-  &:active {
-    background-color:darken(#49cf89, 15%);
-  }
+/**
+ * Modifiers that change the display type of the button.
+ */
+
+.button--blocked {
+  display: block;
 }
 
-.button--red {
-  background-color:#fa174c;
-  border-color:darken(#fa174c, 15%);
-  &:active {
-    background-color:darken(#fa174c, 15%);
-  }
+/**
+ * Alternative button sizes.
+ */
+
+.button--small {
+  font-size: 14px;
+  line-height: 22px;
+  padding: 4px 8px;
 }
 
-
-
-.buttonSet {
-  .button {
-    margin-right:10px;
-  }
+.button--large {
+  font-size: 18px;
+  line-height: 26px;
+  padding: 12px 16px;
 }
 
-.buttonSet--onRight {
-  .button {
-    margin-left:10px;
-    margin-right:0;
+/**
+ * Modifiers that change the color of the button.
+ * To add a new button, simply add a name and hex color value to the map below.
+ */
+
+$button-styles: (
+  blue: $blue,
+  green: $green,
+  orange: $orange,
+  red: $red
+);
+
+@each $name, $color in $button-styles {
+  .button--#{$name} {
+    background-color: $color;
+
+    &:hover {
+      background-color: lighten($color, 5%);
+    }
+
+    &:active {
+      background-color: darken($color, 5%);
+    }
   }
 }

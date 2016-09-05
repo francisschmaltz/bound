@@ -1,27 +1,17 @@
 !!!
 %html
   %head
-    %title #{@page_title} - Bound
     = csrf_meta_tags
-    = stylesheet_link_tag "https://fonts.googleapis.com/css?family=Lato:300,400,600,700,900", :async => true
-    = stylesheet_link_tag 'application/application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-    %meta{:name => "turbolinks-cache-control", :content => "no-cache"}
+    %meta{:charset => "utf-8"}
+    %meta{:content => "no-cache", :name => "turbolinks-cache-control"}
+    %title #{@page_title} – Bound
+    = stylesheet_link_tag "application/application", "data-turbolinks-track" => "reload"
+    = javascript_include_tag "application", "data-turbolinks-track" => "reload"
   %body
-    .page
+    - if logged_in?
+      = render "shared/sidebar"
+    .content
       = display_flash
-
-      .header
-        %ul.header__nav
-          - if logged_in?
-            %li.header__userName= current_user.description
-            %li= link_to "Zones", root_path
-            %li= link_to "Users", users_path
-            %li= link_to "API Tokens", api_tokens_path
-            %li= link_to "Logout", logout_path, :method => :delete
-
-            - if changes_pending > 0
-              %li= link_to "Apply " + pluralize(changes_pending, 'Change'), publish_path, :class => 'header__publishLink'
-          - else
-            %li Not logged in
       = yield
+    .js-outlet{"data-turbolinks-permanent" => true}
+      .overlay

@@ -1,0 +1,23 @@
+.authPage {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  min-height: 75vh;
+}
+
+.authPage__box {
+  padding: 48px 48px 52px;
+}
+
+.authPage__button {
+  margin: 24px 0 0;
+}
+
+.authPage__container {
+  margin: 32px auto;
+  max-width: 608px;
+}
+
+.authPage__title {
+  margin: 0 0 16px;
+}

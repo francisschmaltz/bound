@@ -1,5 +1,12 @@
-%h1 Create an account
-%p
-  To create an account and access Bound you need to login using #{Bound.config.auth.description}.
-  If you don't already have an account you may be prompted to create one.
-%p= link_to "Continue", "/auth/#{Bound.config.auth.strategy}"
+- @page_title = "Create an account"
+
+.authPage
+  .authPage__container
+    .box.authPage__box.u-textCenter
+      %h1.heading.heading--alpha.authPage__title
+        Create an account
+      %p.text--larger.text--subtle
+        To create an account and access Bound you need to login using #{content_tag(:strong, Bound.config.auth.description)}.
+        If you don't already have an account you may be prompted to create one.
+      %p
+        = link_to "Continue", "/auth/#{Bound.config.auth.strategy}", :class => "button button--blocked button--green button--large authPage__button"

@@ -1,6 +1,11 @@
-- @page_title = "Login"
-.page__header You've been logged out
-.page__content
-  %p.u-margin
-    %p.u-margin You've been logged out of Bound. You can now navigate away from this page.
-    %p= link_to "Login again", "/auth/#{Bound.config.auth.strategy}", :class => 'button'
+- @page_title = "You have been logged out"
+
+.authPage
+  .authPage__container
+    .box.authPage__box.u-textCenter
+      %h1.heading.heading--alpha.authPage__title
+        You have been logged out
+      %p.text--larger.text--subtle
+        You&rsquo;ve been logged out of #{content_tag(:strong, "Bound")}. You can now navigate away from this page.
+      %p.authPage__button
+        = link_to "Click here to login again", "/auth/#{Bound.config.auth.strategy}", :class => "button button--blocked button--green button--large"

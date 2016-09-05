@@ -1,0 +1,32 @@
+.zoneItem {
+  display: block;
+  padding: 16px 16px;
+
+  &:hover {
+    background: #fdfdfd;
+  }
+}
+
+.zoneItem__desc {
+  flex: 1 1 auto;
+  min-width: 1px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.zoneItem__header {
+  align-items: flex-start;
+  display: flex;
+}
+
+.zoneItem__status {
+  flex: 0 0 auto;
+  margin: 0 0 0 8px;
+}
+
+.zoneItem__timestamp {
+  color: $gray-darkest;
+  font-size: 14px;
+  margin: -2px 0 0;
+}

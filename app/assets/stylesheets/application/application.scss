@@ -1,18 +1,10 @@
-@import "global/variables";
-@import "global/reset";
+@import "variables";
+
+@import "base";
 
 @import "elements/*";
 @import "components/*";
 
-@import "global/utility";
+@import "state";
 
-html {
-  font-family:Lato, Arial, sans-serif;
-  font-size:16px;
-  color:#222;
-}
-
-.turbolinks-progress-bar {
-  height: 3px;
-  background-color: #333;
-}
+@import "utility";

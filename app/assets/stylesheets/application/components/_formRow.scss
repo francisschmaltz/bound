@@ -1,0 +1,22 @@
+.formRow {
+  display: flex;
+}
+
+.formRow__col {
+  flex: 0 0 auto;
+  width: calc((100% - 48px) / 5);
+
+  &:not(:last-of-type) {
+    margin: 0 12px 0 0;
+  }
+}
+
+.formRow__col--max {
+  flex: 1 1 auto;
+  width: auto;
+}
+
+.formRow__col--min {
+  flex: 0 0 20%;
+  width: auto;
+}

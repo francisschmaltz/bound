@@ -1,27 +1,29 @@
-= form_for [@zone, @record] do |f|
-  = f.error_messages
-  .fieldSet
-    .fieldSet__field
-      = f.label :type, :class => 'fieldSet__label'
-      .fieldSet__input= f.select :type, options_for_select(Bound::RecordType.all.values.map { |rt| [rt.class.type_name, rt.class.name] }, f.object.type.class.name), {}, :class => 'js-record-type-select textInput textInput--select', :autofocus => true
-    .fieldSet__field
-      = f.label :name, :class => 'fieldSet__label'
-      .fieldSet__input= f.text_field :name, :class => 'textInput'
-
-    - for key, type in Bound::RecordType.all
-      .s{:data => {:type => key}}
-        - for field in type.fields
-          .fieldSet__field
-            = label_tag "record[form_data_hash][#{field[:name]}]", field[:label], :class => 'fieldSet__label'
-            .fieldSet__input= record_type_field_tag @record, type, field
-    .fieldSet__field
-      = f.label :ttl, :class => 'fieldSet__label'
-      .fieldSet__input= f.text_field :ttl, :class => 'textInput', :placeholder => @zone.ttl
-
-  .fieldSet__submit
-    = f.submit "Save record", :class => "button"
-    or
-    = link_to "back to zone", @zone
-    - if @record.persisted?
-      .fieldSet__delete
-        = link_to "Delete record", [@zone, @record], :method => :delete, :data => {:confirm => "Are you sure you wish to remove this record?"}, :class => 'button button--red'
+.container
+  = form_for [@zone, @record] do |f|
+    = f.error_messages
+    .box.island.island--form.module
+      .formGroup.formRow
+        .formRow__col.formRow__col--max
+          = f.label :name, "Name", :class => "formLabel"
+          = f.text_field :name, :class => "formControl"
+        .formRow__col.formRow__col--min
+          = f.label :type, "Type", :class => "formLabel"
+          = f.select :type, options_for_select(Bound::RecordType.all.values.map { |rt| [rt.class.type_name, rt.class.name] }, f.object.type.class.name), {}, :autofocus => true, :class => "formControl formControl--select js-record-type-select"
+        .formRow__col.formRow__col--min
+          = f.label :ttl, "TTL", :class => "formLabel"
+          = f.text_field :ttl, :class => "formControl", :placeholder => @zone.ttl
+    .module
+      .box.island.island--form
+        .recordRows
+          - Bound::RecordType.all.each do |key, type|
+            - type.fields.each do |field|
+              .recordRows__col{:class => ("recordRows__col--full" if key == "Bound::BuiltinRecordTypes::TXT"), :data => {:type => key}}
+                = label_tag "record_form_data_#{field[:name]}", field[:label], :class => "formLabel"
+                = record_type_field_tag @record, type, field
+    .formFooter.module.module--push
+      = f.submit "Save record", :class => "button button--green"
+      %p.formFooter__subText
+        or
+        = link_to "back to zone", @zone, :class => "formFooter__link"
+      - if @record.persisted?
+        = link_to "Delete", [@zone, @record], :method => :delete, :data => {:confirm => "Are you sure you wish to delete this record?"}, :class => "button button--red"

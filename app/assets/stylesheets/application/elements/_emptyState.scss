@@ -1,0 +1,18 @@
+.emptyState {
+  color: #777777;
+  padding: 32px 16px;
+  text-align: center;
+}
+
+.emptyState__link {
+  text-decoration: underline;
+
+  &:hover {
+    color: darken(#555555, 5%);
+  }
+
+  &:active {
+    background: $gray-light;
+    padding: 2px 0;
+  }
+}

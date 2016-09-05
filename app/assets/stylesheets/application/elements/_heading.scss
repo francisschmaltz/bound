@@ -1,0 +1,23 @@
+.heading {
+  font-weight: 700;
+}
+
+/**
+ * Modifiers that adjust the size of the heading.
+ * The `line-height` should always be `font-size` + 8px.
+ */
+
+.heading--alpha {
+  font-size: 22px;
+  line-height: 30px;
+}
+
+.heading--beta {
+  font-size: 20px;
+  line-height: 28px;
+}
+
+.heading--gamma {
+  font-size: 18px;
+  line-height: 26px;
+}

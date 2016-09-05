@@ -1,46 +1,64 @@
 - @page_title = "Import - #{@zone.name}"
-.page__header Import Records to #{@zone.name}
-.page__content
+- breadcrumb "Zones", zones_path
+- breadcrumb @zone.name, zone_path(@zone)
+
+= render_header "Import Records"
+
+.container
   = form_tag do
     - if @import.records.empty?
-      %p.u-margin.u-text
-        Paste the records (from a zone file) that you wish to import below. If there are any errors
-        importing the file an error will be displayed.
-      %p.u-margin= text_area_tag 'records', params[:records], :class => 'textInput textInput--longArea', :autofocus => true
-      %p
-        = submit_tag "Preview Records", :class => 'button'
-        or
-        = link_to "go back to zone", @zone, :class => "u-link"
+      .box.infoBlock.module
+        = image_tag "info.svg", :class => "infoBlock__icon"
+        %p.infoBlock__content
+          Paste the records (from a zone file) that you wish to import below.
+          If there are any errors importing the file an error will be displayed.
+      .box.island.module
+        = text_area_tag "records", params[:records], :autofocus => true, :class => "formControl formControl--mono formControl--textarea", :rows => 12
+      .formFooter.module.module--push
+        = submit_tag "Preview Records", :class => "button button--green"
+        %p.formFooter__subText
+          or
+          = link_to "go back to zone", @zone, :class => "formFooter__link"
     - else
-
-      %p.u-margin.u-text
-        These are the records which have been detected from the records you have provided. To go ahead and add these
-        records just press the button below. Records shown with red errors will not be imported and records which match
-        these exactly will be skipped.
-      %p.u-margin.u-bold
-        Found #{pluralize @import.records.size, 'record'} to import
-      %table.dataTable.u-margin
-        %thead
-          %tr
-            %td{:width => "10%"} Type
-            %td{:width => "27%"} Name
-            %td{:width => "10%"} TTL
-            %td{:width => "53%"} Data
-        %tbody
-          - for record in @import.records
+      .box.infoBlock.module
+        = image_tag "info.svg", :class => "infoBlock__icon"
+        %p.infoBlock__content
+          These are the records which have been detected from the records you have provided.
+          To go ahead and add these records just press the button below.
+          Records shown with red errors will not be imported and records which match these exactly will be skipped.
+      %p.module
+        Found <strong>#{pluralize @import.records.size, "record"}</strong> to import
+      .box.module
+        %table.zoneTable
+          %thead.zoneTable__header
             %tr
-              %td= record_type_tag record.type
-              %td.dataTable__wrapCell= record.name
-              %td= record.ttl
-              %td.dataTable__wrapCell
-                = record.data
-                - unless record.valid?
-                  %ul.standardList.u-red
-                    - for error in record.errors.full_messages
-                      %li= error
-
-      %p
-        = submit_tag "Import Records", :name => 'import', :class => 'button'
-        or
-        = link_to "go back to zone", @zone, :class => "u-link"
+              %td.zoneTable__col.zoneTable__col--default
+                Type
+              %td.zoneTable__col.zoneTable__col--default
+                Name
+              %td.zoneTable__col.zoneTable__col--default
+                TTL
+              %td.zoneTable__col.zoneTable__col--data
+                Data
+          %tbody
+            - @import.records.each do |record|
+              %tr.zoneTable__row
+                %td.zoneTable__col.zoneTable__col--default
+                  = record_type_tag record.type
+                %td.zoneTable__col.zoneTable__col--default
+                  = record.name
+                %td.zoneTable__col.zoneTable__col--default
+                  = record.ttl || content_tag(:span, "&mdash;".html_safe, :class => "text--subtle")
+                %td.zoneTable__col.zoneTable__col--data
+                  = record.data
+                  - unless record.valid?
+                    %ul
+                      - record.errors.full_messages.each do |error|
+                        %li
+                          = error
+      .formFooter.module.module--push
+        = submit_tag "Import Records", :class => "button button--green formFooter__button", :name => "import"
+        %p.formFooter__subText
+          or
+          = link_to "go back to zone", @zone, :class => "formFooter__link"
       ~ hidden_field_tag 'records', params[:records]

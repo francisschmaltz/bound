@@ -1,28 +1,38 @@
 - @page_title = @zone.name
-.page__header
-  = @zone.description
-  .page__headerButton
-    = link_to "Add Record", new_zone_record_path(@zone), :class => 'button'
-    = link_to "Import", import_zone_path(@zone), :class => 'button'
-    = link_to "Edit", edit_zone_path(@zone), :class => 'button'
-.page__content
-  %table.dataTable.u-margin
-    %thead
-      %tr
-        %td{:width => "10%"} Type
-        %td{:width => "27%"} Name
-        %td{:width => "10%"} TTL
-        %td{:width => "53%"} Data
-    %tbody
-      - if @records.empty?
-        %tr
-          %td.dataTable__empty{:colspan => 4} There are no records for this zone yet.
-      - else
-        - for record in @records
-          %tr
-            %td= record_type_tag record.type
-            %td.dataTable__wrapCell= link_to record.name || "@", edit_zone_record_path(@zone, record), :class => "u-link"
-            %td= record.ttl
-            %td.dataTable__wrapCell= record.data
+- breadcrumb "Zones", zones_path
+- header_action "Add Record", new_zone_record_path(@zone), :color => :green
+- header_action "Edit", edit_zone_path(@zone), :color => :orange
+- header_action "Import", import_zone_path(@zone), :color => :blue
 
-  %p.u-align-right= link_to "View raw zone file", zone_file_zone_path(@zone), :class => 'u-subLink', :target => '_blank'
+= render_header @zone.description
+
+.container
+  .box.module
+    %table.zoneTable
+      %thead.zoneTable__header
+        %tr
+          %td.zoneTable__col.zoneTable__col--default
+            Type
+          %td.zoneTable__col.zoneTable__col--default
+            Name
+          %td.zoneTable__col.zoneTable__col--default
+            TTL
+          %td.zoneTable__col.zoneTable__col--data
+            Data
+      %tbody
+        - if @records.empty?
+          %tr
+            %td{:colspan => 4} There are no records for this zone yet.
+        - else
+          - @records.each do |record|
+            %tr.boxItem.zoneTable__row
+              %td.zoneTable__col.zoneTable__col--default
+                = record_type_tag record.type
+              %td.zoneTable__col.zoneTable__col--default
+                = link_to (record.name || "@"), edit_zone_record_path(@zone, record), :class => "zoneTable__link"
+              %td.zoneTable__col.zoneTable__col--default
+                = record.ttl || content_tag(:span, "&mdash;".html_safe, :class => "text--subtle")
+              %td.zoneTable__col.zoneTable__col--data
+                = record.data
+  .module.u-textRight
+    = link_to "View raw zone file", zone_file_zone_path(@zone), :class => "button button--blue rawButton", :target => "_blank"

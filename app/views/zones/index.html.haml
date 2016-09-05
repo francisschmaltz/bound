@@ -1,17 +1,31 @@
 - @page_title = "Zones"
-.page__header
-  .page__headerButton= link_to "Add new zone", new_zone_path, :class => 'button'
-  Zones
-.page__content
-  %ul.zoneList
-    - for zone in @zones
-      %li
-        = link_to zone, :class => 'zoneList__item' do
-          = zone.description
-          - if zone.reverse?
-            %span.zoneList__reverse Reverse
-          .zoneList__itemUpdated
-            - if zone.changes_pending?
-              %span.zoneList__hasChanges Pending
-            Last updated #{distance_of_time_in_words_to_now zone.updated_at} ago
+- header_action "Add new zone", new_zone_path, :color => :green
 
+= render_header "Zones"
+
+.container
+  - if @zones.any?
+    .module
+      = text_field_tag :q, "", :autofocus => true, :class => "formControl js-searchZones", :placeholder => "Search for a zone&hellip;".html_safe
+  .box.module
+    - if @zones.any?
+      %ul
+        - @zones.each do |zone|
+          %li.boxItem.js-zoneItem
+            = link_to zone, :class => "zoneItem" do
+              .zoneItem__header
+                %h2.heading.text--larger.zoneItem__desc.js-zoneItem__desc
+                  = zone.description
+                - if zone.reverse?
+                  %span.lozenge.lozenge--orange.zoneItem__status
+                    Reverse
+                - if zone.changes_pending?
+                  %span.lozenge.lozenge--gray.zoneItem__status
+                    Pending
+              %p.zoneItem__timestamp
+                Last updated #{distance_of_time_in_words_to_now zone.updated_at} ago
+      %p.emptyState.is-hidden.js-emptyState
+        No zones match your search query…
+    - else
+      %p.emptyState
+        No zones have been created yet. #{link_to "Add a new zone", new_zone_path, :class => "emptyState__link"} now.

@@ -1,0 +1,80 @@
+.sidebar {
+  background: #3b4549;
+  color: #8d999f;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  width: 224px;
+}
+
+.sidebar__apply {
+  margin: 16px 0;
+  flex: 0 0 auto;
+  text-align: center;
+}
+
+.sidebar__branding {
+  align-items: center;
+  background: rgba(255, 255, 255, .125);
+  display: flex;
+  flex: 0 0 auto;
+  height: 72px;
+}
+
+.sidebar__container {
+  padding: 0 16px;
+}
+
+.sidebar__footer {
+  border-top: 1px solid rgba(0, 0, 0, .2);
+  font-size: 14px;
+  flex: 0 0 auto;
+  margin: 16px 0 0;
+  padding: 16px 24px;
+}
+
+.sidebar__footerLogout {
+  font-size: 12px;
+  margin: -3px 0 0;
+  text-decoration: underline;
+}
+
+.sidebar__logo {
+  display: block;
+}
+
+.sidebar__menuItem {
+  border-bottom: 1px solid rgba(0, 0, 0, .2);
+
+  &.is-active {
+    color: $white;
+    font-weight: 700;
+  }
+}
+
+.sidebar__menuLink {
+  -webkit-user-select: none;
+  align-items: center;
+  display: flex;
+  padding: 14px 0;
+  user-select: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.sidebar__menuLinkIcon {
+  display: block;
+  height: 20px;
+  margin: 0 14px 0 0;
+  width: 20px;
+}
+
+.sidebar__nav {
+  flex: 1 1 auto;
+}
+
+.sidebar__section + .sidebar__section {
+  margin: 16px 0 0;
+}

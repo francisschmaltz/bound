@@ -1,24 +1,21 @@
 - @page_title = "API Tokens"
-%h1.page__header
-  API Tokens
-  .page__headerButton
-    = link_to "Add new token", new_api_token_path, :class => 'button'
 
-.page__content
-  %table.dataTable
-    %thead
-      %tr
-        %td{:width => "30%"} Name
-        %td{:width => "60%"} Token
-        %td{:width => "10%"}
-    %tbody
-      - if @api_tokens.empty?
-        %tr
-          %td.dataTable__empty{:colspan => 3} There are no API tokens
-      - else
-        - for token in @api_tokens
-          %tr
-            %td= token.name
-            %td= token.token
-            %td.u-center
-              = link_to "Revoke", token, :method => :delete, :data => {:confirm => "Are you sure you wish to revoke this token's access?"}, :class => 'u-link'
+- header_action "Add new token", new_api_token_path, :color => :green
+
+= render_header "API Tokens"
+
+.container
+  - if @api_tokens.any?
+    %ul.box
+      - @api_tokens.each do |token|
+        %li.apiTokenItem.boxItem.island
+          .apiTokenItem__content
+            %h2.heading.heading--gamma
+              = token.name
+            %pre
+              ~ token.token
+          = link_to "Revoke", token, :class => "button button--red button--small apiTokenItem__action", :data => {:confirm => "Are you sure you wish to revoke this token's access?"}, :method => :delete
+  - else
+    %p.box.emptyState
+      There are no API tokens
+

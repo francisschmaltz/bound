@@ -1,0 +1,21 @@
+.infoBlock {
+  align-items: center;
+  background: #edf5fb;
+  color: $blue;
+  display: flex;
+  padding: 12px 16px;
+}
+
+.infoBlock__content {
+  flex: 1 1 auto;
+  font-size: 14px;
+  min-width: 1px;
+}
+
+.infoBlock__icon {
+  display: block;
+  flex: 0 0 auto;
+  height: 28px;
+  margin: 0 12px 0 0;
+  width: 28px;
+}

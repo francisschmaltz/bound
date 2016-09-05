@@ -1,48 +1,60 @@
 - @page_title = "Apply Changes"
-%h1.page__header Apply Pending Changes
-.page__content
-  .publishResult{:class => @result.success? ? "publishResult--success" : "publishResult--failed"}
-    - if @result.success?
-      %p.publishResult__title Changes applied successfully.
+
+- if @result.success?
+  %p.flashMessage.flashMessage--notice
+    Changes applied successfully.
+- else
+  %p.flashMessage.flashMessage--alert
+    Changes not applied successfully.
+
+= render_header "Apply Changes"
+
+.container
+  - unless @result.success?
+    - if @result.reload == false
+      .box.module.island
+        %p Failed to reload. Check the system logs for any issues with this.
+    - elsif @result.zone_file_errors
+      .box.module.island.island--form
+        %p.module
+          The following zones had errors in their generated zone files. Please check the records for these zones and try again.
+        %pre.errorBlock.module~ @result.zone_file_errors.map { |zone, err| "<strong>#{link_to(zone.name, zone)}</strong><br>#{h err}\n".html_safe }.join("\n").html_safe
     - else
-      %p.publishResult__title Changes not applied successfully.
+      .box.module.island
+        %pre.errorBlock~ @result.configuration_errors
 
-    .publishResult__content
+  - if Bound.config.replication
+    .box.module
+      .boxHeader
+        %h2.heading.text--larger
+          Slaves updates
+      %ul
+        - @result.slaves.each do |slave, result|
+          %li.boxItem.changeListing.island{:class => result[:success] == false ? "changeListing--zoneDeleted" : "changeListing--zoneAdded"}
+            <strong>#{slave}:</strong> #{result[:text]}
 
-      - unless @result.success?
-        - if @result.reload == false
-          %p Failed to reload. Check the system logs for any issues with this.
-        - elsif @result.zone_file_errors
-          %p.u-margin The following zones had errors in their generated zone files. Please check the records for these zones and try again.
-          %pre.publishResult__configError~ @result.zone_file_errors.map { |zone, err| "<b>#{link_to(zone.name, zone)}</b><br>#{h err}\n".html_safe}.join("\n").html_safe
-        - else
-          %pre.publishResult__configError~ @result.configuration_errors
+  .box.module
+    .boxHeader
+      %h2.heading.text--larger
+        Zone files exported
+    - if @result.zone_files_exported.empty?
+      %p.emptyState
+        No zone files were exported.
+    - else
+      %ul
+        - @result.zone_files_exported.each do |file|
+          %li.boxItem.changeListing.changeListing--zoneAdded.island
+            = file
 
-
-
-      - if Bound.config.replication
-        .publishResult__list
-          %h2.publishResult__subTitle Slaves updates
-          %ul.publishResult__fileList
-            - for slave, result in @result.slaves
-              %li{:class => result[:success] == false ? 'u-red' : ''}
-                %b #{slave}:
-                = result[:text]
-
-      .publishResult__list
-        %h2.publishResult__subTitle Zone files exported
-        - if @result.zone_files_exported.empty?
-          %p.publishResult__noData No zone files were exported.
-        - else
-          %ul.publishResult__fileList
-            - for file in @result.zone_files_exported
-              %li= file
-
-      .publishResult__list
-        %h2.publishResult__subTitle Zone files deleted
-        - if @result.zone_files_deleted.empty?
-          %p.publishResult__noData No zone files were deleted.
-        - else
-          %ul.publishResult__fileList
-            - for file in @result.zone_files_deleted
-              %li= file
+  .box.module
+    .boxHeader
+      %h2.heading.text--larger
+        Zone files deleted
+    - if @result.zone_files_deleted.empty?
+      %p.emptyState
+        No zone files were deleted.
+    - else
+      %ul
+        - @result.zone_files_deleted.each do |file|
+          %li.boxItem.changeListing.changeListing--zoneDeleted.island
+            = file

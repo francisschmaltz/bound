@@ -2,6 +2,7 @@ class RecordsController < ApplicationController
 
   before_action { @zone = Zone.find(params[:zone_id]) }
   before_action { params[:id] && @record = @zone.records.find(params[:id]) }
+  before_action { @active_nav = :zones }
 
   def index
     redirect_to @zone

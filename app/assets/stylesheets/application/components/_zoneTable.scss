@@ -1,0 +1,69 @@
+.zoneTable {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.zoneTable__col {
+  vertical-align: top;
+
+  .zoneTable__header & {
+    padding: 8px 12px;
+
+    &:first-of-type {
+      padding: 8px 12px 8px 24px;
+    }
+
+    &:last-of-type {
+      padding: 8px 24px 8px 12px;
+    }
+  }
+
+  .zoneTable__row & {
+    padding: 8px 12px;
+
+    &:first-of-type {
+      padding: 12px 12px 12px 24px;
+    }
+
+    &:last-of-type {
+      padding: 12px 24px 12px 12px;
+    }
+  }
+}
+
+.zoneTable__col--default {
+  min-width: 108px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.zoneTable__col--data {
+  width: 99%;
+  word-break: break-all;
+}
+
+.zoneTable__header {
+  border-bottom: 2px solid $gray-dark;
+  font-weight: 500;
+}
+
+.zoneTable__row {
+  &:not(:last-of-type) {
+    border-bottom: 1px solid $gray-medium;
+  }
+
+  &:nth-of-type(even) {
+    background: #fdfdfd;
+  }
+}
+
+.zoneTable__link {
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:active {
+    background: $gray-medium;
+    padding: 2px 0;
+  }
+}

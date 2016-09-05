@@ -1,0 +1,23 @@
+.formFooter {
+  align-items: center;
+  display: flex;
+}
+
+.formFooter__link {
+  text-decoration: underline;
+
+  &:hover {
+    color: darken($gray-darkest, 5%);
+  }
+
+  &:active {
+    background: $gray-medium;
+    padding: 2px 0;
+  }
+}
+
+.formFooter__subText {
+  color: $gray-darkest;
+  flex: 1 1 auto;
+  margin: 0 8px;
+}

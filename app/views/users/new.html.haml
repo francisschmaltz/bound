@@ -1,20 +1,20 @@
 - @page_title = "Add new user"
-%h1.page__header Add new user
-.page__content
-= form_for @user do |f|
-  = f.error_messages
-  .fieldSet
-    .fieldSet__field
-      = f.label :email_address, :class => 'fieldSet__label'
-      .fieldSet__input
-        %p.fieldSet__helpText
-          To add a new user just enter their e-mail address below. An email will be sent to them
-          and they'll be prompted to login or create their own account with your chosen
-          authentication provider.
+- breadcrumb "Users", users_path
 
+= render_header "Add new user"
 
-        = f.text_field :email_address, :class => 'textInput', :autofocus => true
-    .fieldSet__submit
-      = f.submit "Send invite e-mail", :class => "button"
-      or
-      = link_to "back to user list", users_path
+.container
+  = form_for @user do |f|
+    = f.error_messages
+    .box.island.island--form.module
+      .formGroup
+        = f.label :email_address, "E-Mail Address", :class => "formLabel"
+        %p.formHint
+          To add a new user just enter their e-mail address below.
+          An email will be sent to them and they’ll be prompted to login or create their own account with your chosen authentication provider.
+        = f.text_field :email_address, :autofocus => true, :class => "formControl"
+    .formFooter.module.module--push
+      = f.submit "Send invite e-mail", :class => "button button--green"
+      %p.formFooter__subText
+        or
+        = link_to "back to user list", users_path, :class => "formFooter__link"

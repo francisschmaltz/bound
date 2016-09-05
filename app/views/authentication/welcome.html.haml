@@ -1,7 +1,12 @@
-- @page_title = "Login"
-.page__header Welcome
-.page__content
-  %p.u-margin
-    There are no users for your system yet. When you click the button below you'll be directed to
-    #{Bound.config.auth.description} and the user you login with will be created as the first user.
-  %p= link_to "Login using #{Bound.config.auth.description}", "/auth/#{Bound.config.auth.strategy}", :class => 'button'
+- @page_title = "Welcome"
+
+.authPage
+  .authPage__container
+    .box.authPage__box.u-textCenter
+      %h1.heading.heading--alpha.authPage__title
+        Welcome
+      %p.text--larger.text--subtle
+        There are no users for your system yet.
+        When you click the button below you&rsquo;ll be directed to #{Bound.config.auth.description} and the user you login with will be created as the first user.
+      %p.authPage__button
+        = link_to "Login using #{Bound.config.auth.description}", "/auth/#{Bound.config.auth.strategy}", :class => "button button--blocked button--green button--large"

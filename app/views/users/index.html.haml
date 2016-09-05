@@ -1,20 +1,15 @@
 - @page_title = "Users"
-%h1.page__header
-  Users
-  .page__headerButton
-    = link_to "Add new user", new_user_path, :class => 'button'
+- header_action "Add new user", new_user_path, :color => :green
 
-.page__content
-  %table.dataTable
-    %thead
-      %tr
-        %td{:width => "50%"} E-Mail Address
-        %td{:width => "40%"} Name
-        %td{:width => "10%"}
-    %tbody
-      - for user in @users
-        %tr
-          %td= user.email_address
-          %td= user.name
-          %td.u-center
-            = link_to "Revoke", user, :method => :delete, :data => {:confirm => "Are you sure you wish to revoke this user's access?"}, :class => 'u-link'
+= render_header "Users"
+
+.container
+  .box
+    %ul
+      - @users.each do |user|
+        %li.boxItem.userItem
+          %h2.heading.text--larger
+            = user.name
+          %span.userItem__email
+            = user.email_address
+          = link_to "Revoke", user, :class => "button button--red button--small userItem__revoke", :data => {:confirm => "Are you sure you wish to revoke this user's access?"}, :method => :delete

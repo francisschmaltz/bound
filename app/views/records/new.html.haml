@@ -1,4 +1,7 @@
 - @page_title = "New record - #{@zone.name}"
-.page__header
-  New record for #{@zone.name}
-.page__content= render 'form'
+- breadcrumb "Zones", zones_path
+- breadcrumb @zone.name, zone_path(@zone)
+
+= render_header "New Record"
+
+= render "form"

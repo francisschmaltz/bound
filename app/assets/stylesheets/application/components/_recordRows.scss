@@ -1,0 +1,23 @@
+.recordRows {
+  align-items: stretch;
+  flex-wrap: wrap;
+  display: flex;
+  margin: -8px;
+}
+
+.recordRows__col {
+  flex: 1 1 auto;
+  margin: 8px;
+  min-width: calc(25% - 16px);
+}
+
+.recordRows__content {
+  align-items: center;
+  display: flex;
+  flex: 1 1 auto;
+}
+
+.recordRows__col--full {
+  max-width: none;
+}
+

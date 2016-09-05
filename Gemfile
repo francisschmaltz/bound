@@ -21,6 +21,7 @@ gem 'foreman'
 gem 'nissh'
 gem 'net-sftp', :require => 'net/sftp'
 gem 'moonrope'
+gem 'autoprefixer-rails', '~> 6.4'
 
 require_relative './lib/bound/config'
 if Bound.yaml_config['auth'] && strategy = Bound.yaml_config['auth']['strategy']

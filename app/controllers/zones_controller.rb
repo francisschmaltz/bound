@@ -1,6 +1,7 @@
 class ZonesController < ApplicationController
 
   before_action { params[:id] && @zone = Zone.find(params[:id]) }
+  before_action { @active_nav = :zones }
 
   def index
     @zones = Zone.order(:updated_at => :desc).includes(:pending_changes)

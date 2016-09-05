@@ -1,0 +1,18 @@
+.errorExplanation {
+  background: $red;
+  color: $white;
+  margin: 0 0 16px;
+  padding: 16px;
+
+  h2 {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 2px;
+  }
+
+  ul {
+    list-style-position: inside;
+    list-style-type: disc;
+    margin: 1px 0 0;
+  }
+}
