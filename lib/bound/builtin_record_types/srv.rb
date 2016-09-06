@@ -9,10 +9,10 @@ module Bound
 
       def fields
         [
-          {:name => 'target', :label => 'Target'},
           {:name => 'priority', :label => 'Priority'},
           {:name => 'weight', :label => 'Weight'},
           {:name => 'port', :label => 'Port'},
+          {:name => 'target', :label => 'Target'}
         ]
       end
 
