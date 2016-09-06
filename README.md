@@ -4,6 +4,8 @@ Bound is a web-based frontend for managing DNS zones. It sits on top of an
 existing BIND installation and exports appropriately formatted zone files and
 handles configuration reloads when needed.
 
+![Screenshot](https://share.adam.ac/16/8kduueswXg.png)
+
 ## Installation
 
 1. `git clone https://github.com/adamcooke/bound`
