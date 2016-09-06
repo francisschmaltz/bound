@@ -3,6 +3,10 @@
   padding: 20px 24px;
 }
 
+.flashMessage--alert {
+  background: $red;
+}
+
 .flashMessage--notice {
   background: $green;
 }

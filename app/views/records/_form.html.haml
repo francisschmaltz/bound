@@ -5,10 +5,10 @@
       .formGroup.formRow
         .formRow__col.formRow__col--max
           = f.label :name, "Name", :class => "formLabel"
-          = f.text_field :name, :class => "formControl"
+          = f.text_field :name, :autofocus => true, :class => "formControl"
         .formRow__col.formRow__col--min
           = f.label :type, "Type", :class => "formLabel"
-          = f.select :type, options_for_select(Bound::RecordType.all.values.map { |rt| [rt.class.type_name, rt.class.name] }, f.object.type.class.name), {}, :autofocus => true, :class => "formControl formControl--select js-record-type-select"
+          = f.select :type, options_for_select(Bound::RecordType.all.values.map { |rt| [rt.class.type_name, rt.class.name] }, f.object.type.class.name), {}, :class => "formControl formControl--select js-record-type-select"
         .formRow__col.formRow__col--min
           = f.label :ttl, "TTL", :class => "formLabel"
           = f.text_field :ttl, :class => "formControl", :placeholder => @zone.ttl

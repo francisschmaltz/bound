@@ -6,15 +6,15 @@
 .container
   - if @zones.any?
     .module
-      = text_field_tag :q, "", :autofocus => true, :class => "formControl js-searchZones", :placeholder => "Search for a zone&hellip;".html_safe
+      = text_field_tag :q, "", :autofocus => true, :class => "formControl js-searchObjects", :placeholder => "Search for a zone&hellip;".html_safe
   .box.module
     - if @zones.any?
       %ul
-        - @zones.each do |zone|
-          %li.boxItem.js-zoneItem
+        - @zones.each_with_index do |zone, index|
+          %li.boxItem.js-objectItem{:class => ("is-hovered" if index.zero?), :data => {:url => zone_path(zone)}}
             = link_to zone, :class => "zoneItem" do
               .zoneItem__header
-                %h2.heading.text--larger.zoneItem__desc.js-zoneItem__desc
+                %h2.heading.text--larger.zoneItem__desc.js-objectItem__text
                   = zone.description
                 - if zone.reverse?
                   %span.lozenge.lozenge--orange.zoneItem__status

@@ -1,30 +1,37 @@
 %header.sidebar
   = link_to root_path, :class => "sidebar__branding sidebar__section" do
-    .sidebar__container
+    .sidebar__container.sidebar__logo
+      = image_tag "bound.svg", :class => "sidebar__logoIcon"
+      %h1.sidebar__logoText
+        Bound
   - if changes_pending > 0
     .sidebar__apply
       .sidebar__container
         = link_to "Apply #{pluralize(changes_pending, "Change")}", publish_path, :class => "button button--blocked button--green"
   %nav.sidebar__nav
-    .sidebar__container
-      %ul.sidebar__menu
-        %li.sidebar__menuItem{:class => ("is-active" if @active_nav == :zones)}
-          = link_to root_path, :class => "sidebar__menuLink" do
-            = image_tag "globe.svg", :alt => "Zones Icon", :class => "sidebar__menuLinkIcon"
-            %span.sidebar__menuLinkText
-              Zones
-        %li.sidebar__menuItem{:class => ("is-active" if @active_nav == :users)}
-          = link_to users_path, :class => "sidebar__menuLink" do
-            = image_tag "user.svg", :alt => "Users Icon", :class => "sidebar__menuLinkIcon"
-            %span.sidebar__menuLinkText
-              Users
-        %li.sidebar__menuItem{:class => ("is-active" if @active_nav == :tokens)}
-          = link_to api_tokens_path, :class => "sidebar__menuLink" do
-            = image_tag "key.svg", :alt => "API Tokens Icon", :class => "sidebar__menuLinkIcon"
-            %span.sidebar__menuLinkText
-              API Tokens
+    %ul.sidebar__menu
+      %li.sidebar__menuItem{:class => ("is-active" if @active_nav == :zones)}
+        = link_to root_path, :class => "sidebar__menuLink" do
+          = image_tag "globe.svg", :alt => "Zones Icon", :class => "sidebar__menuLinkIcon"
+          %span.sidebar__menuLinkText
+            Zones
+      %li.sidebar__menuItem{:class => ("is-active" if @active_nav == :users)}
+        = link_to users_path, :class => "sidebar__menuLink" do
+          = image_tag "user.svg", :alt => "Users Icon", :class => "sidebar__menuLinkIcon"
+          %span.sidebar__menuLinkText
+            Users
+      %li.sidebar__menuItem{:class => ("is-active" if @active_nav == :tokens)}
+        = link_to api_tokens_path, :class => "sidebar__menuLink" do
+          = image_tag "key.svg", :alt => "API Tokens Icon", :class => "sidebar__menuLinkIcon"
+          %span.sidebar__menuLinkText
+            API Tokens
   %ul.sidebar__footer
     %p
-      Logged in as <strong>#{current_user.description}</strong>
-    %p.sidebar__footerLogout
+      %span.text--smaller
+        Logged in as:
+      %br
+      %strong #{current_user.description}
+    %p.sidebar__footerLogout.text--smaller
       = link_to "Logout", logout_path, :method => :delete
+  .sidebar__powered.text--smaller
+    Powered by #{link_to "Bound", "https://github.com/adamcooke/bound", :class => "sidebar__poweredLink"}

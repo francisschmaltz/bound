@@ -4,6 +4,7 @@
 }
 
 .zoneTable__col {
+  line-height: 20px;
   vertical-align: top;
 
   .zoneTable__header & {
@@ -19,7 +20,7 @@
   }
 
   .zoneTable__row & {
-    padding: 8px 12px;
+    padding: 12px;
 
     &:first-of-type {
       padding: 12px 12px 12px 24px;
@@ -47,16 +48,6 @@
   font-weight: 500;
 }
 
-.zoneTable__row {
-  &:not(:last-of-type) {
-    border-bottom: 1px solid $gray-medium;
-  }
-
-  &:nth-of-type(even) {
-    background: #fdfdfd;
-  }
-}
-
 .zoneTable__link {
   &:hover {
     text-decoration: underline;
@@ -65,5 +56,24 @@
   &:active {
     background: $gray-medium;
     padding: 2px 0;
+  }
+}
+
+.zoneTable__row {
+  &:hover {
+    background: #f3f3ff !important;
+    cursor: pointer;
+  }
+
+  &.is-hovered {
+    background: #fffdf0 !important;
+  }
+
+  &:not(:last-of-type) {
+    border-bottom: 1px solid $gray-medium;
+  }
+
+  &:nth-of-type(even) {
+    background: #fbfbfb;
   }
 }

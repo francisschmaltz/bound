@@ -15,7 +15,9 @@
 
 .sidebar__branding {
   align-items: center;
-  background: rgba(255, 255, 255, .125);
+  background: rgba(0, 0, 0, .1);
+  border-bottom: 1px solid rgba(0, 0, 0, .2);
+  color: $white;
   display: flex;
   flex: 0 0 auto;
   height: 72px;
@@ -26,21 +28,33 @@
 }
 
 .sidebar__footer {
+  background: rgba(0, 0, 0, .1);
   border-top: 1px solid rgba(0, 0, 0, .2);
-  font-size: 14px;
   flex: 0 0 auto;
   margin: 16px 0 0;
-  padding: 16px 24px;
+  padding: 10px 24px;
 }
 
 .sidebar__footerLogout {
-  font-size: 12px;
-  margin: -3px 0 0;
   text-decoration: underline;
 }
 
 .sidebar__logo {
+  align-items: center;
+  display: flex;
+  flex: 0 0 auto;
+}
+
+.sidebar__logoIcon {
   display: block;
+  height: 28px;
+  margin: 0 12px 0 0;
+  width: 28px;
+}
+
+.sidebar__logoText {
+  font-size: 24px;
+  line-height: 32px;
 }
 
 .sidebar__menuItem {
@@ -56,7 +70,7 @@
   -webkit-user-select: none;
   align-items: center;
   display: flex;
-  padding: 14px 0;
+  padding: 14px 16px;
   user-select: none;
 
   &:hover {
@@ -73,6 +87,25 @@
 
 .sidebar__nav {
   flex: 1 1 auto;
+}
+
+.sidebar__apply ~ .sidebar__nav {
+  border-top: 1px solid rgba(0, 0, 0, .2);
+}
+
+.sidebar__powered {
+  background: rgba(0, 0, 0, .2);
+  border-top: 1px solid rgba(0, 0, 0, .2);
+  flex: 0 0 auto;
+  padding: 8px 16px;
+}
+
+.sidebar__poweredLink {
+  font-weight: 700;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .sidebar__section + .sidebar__section {

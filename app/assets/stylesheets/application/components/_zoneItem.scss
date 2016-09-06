@@ -3,7 +3,11 @@
   padding: 16px 16px;
 
   &:hover {
-    background: #fdfdfd;
+    background: #f3f3ff;
+  }
+
+  .boxItem.is-hovered & {
+    background: #fffdf0;
   }
 }
 

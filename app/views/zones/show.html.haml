@@ -7,6 +7,9 @@
 = render_header @zone.description
 
 .container
+  - if @records.any?
+    .module
+      = text_field_tag :q, "", :autofocus => true, :class => "formControl js-searchObjects", :placeholder => "Search for a record&hellip;".html_safe
   .box.module
     %table.zoneTable
       %thead.zoneTable__header
@@ -24,15 +27,17 @@
           %tr
             %td{:colspan => 4} There are no records for this zone yet.
         - else
-          - @records.each do |record|
-            %tr.boxItem.zoneTable__row
+          - @records.each_with_index do |record, index|
+            %tr.boxItem.zoneTable__row.js-zoneRecord.js-objectItem{:class => ("is-hovered" if index.zero?), :data => {:url => edit_zone_record_path(@zone, record)}}
               %td.zoneTable__col.zoneTable__col--default
                 = record_type_tag record.type
+              %td.zoneTable__col.zoneTable__col--default.js-objectItem__text
+                = record.name || "@"
               %td.zoneTable__col.zoneTable__col--default
-                = link_to (record.name || "@"), edit_zone_record_path(@zone, record), :class => "zoneTable__link"
-              %td.zoneTable__col.zoneTable__col--default
-                = record.ttl || content_tag(:span, "&mdash;".html_safe, :class => "text--subtle")
+                = record.ttl
               %td.zoneTable__col.zoneTable__col--data
                 = record.data
+    %p.emptyState.is-hidden.js-emptyState
+      No records match your search query…
   .module.u-textRight
     = link_to "View raw zone file", zone_file_zone_path(@zone), :class => "button button--blue rawButton", :target => "_blank"

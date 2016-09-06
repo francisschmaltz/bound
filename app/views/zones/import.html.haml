@@ -48,7 +48,7 @@
                 %td.zoneTable__col.zoneTable__col--default
                   = record.name
                 %td.zoneTable__col.zoneTable__col--default
-                  = record.ttl || content_tag(:span, "&mdash;".html_safe, :class => "text--subtle")
+                  = record.ttl
                 %td.zoneTable__col.zoneTable__col--data
                   = record.data
                   - unless record.valid?
