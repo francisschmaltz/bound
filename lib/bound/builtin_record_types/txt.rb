@@ -22,11 +22,19 @@ module Bound
       end
 
       def serialize(hash)
-        '"' + hash['data'] + '"'
+        data = hash['data']
+        total_length = data.size
+        parts, remainder = total_length.divmod(255)
+        parts = parts + (remainder > 0 ? 1 : 0)
+        array = []
+        parts.times do |i|
+          array << '"' + data[i * 255, 255] + '"'
+        end
+        array.join(' ')
       end
 
       def deserialize(string)
-        {'data' => string.gsub(/\A\"/, '').gsub(/\"\z/, '')}
+        {'data' => string.scan(/\".*?\"/).map { |s| s.gsub(/\A\"/, '').gsub(/\"\z/, '') }.join}
       end
 
     end
