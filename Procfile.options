@@ -1,0 +1,6 @@
+app_name: Bound
+log_root: log
+pid_root: tmp/pids
+processes:
+  web:
+    restart_mode: usr2
