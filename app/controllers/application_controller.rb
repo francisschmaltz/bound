@@ -3,11 +3,15 @@ require 'authie/session'
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :login_required
-  rescue_from Authie::Session::InactiveSession, :with => :login_required
-  rescue_from Authie::Session::ExpiredSession, :with => :login_required
-  rescue_from Authie::Session::BrowserMismatch, :with => :login_required
+  rescue_from Authie::Session::InactiveSession, :with => :auth_session_error
+  rescue_from Authie::Session::ExpiredSession, :with => :auth_session_error
+  rescue_from Authie::Session::BrowserMismatch, :with => :auth_session_error
 
   private
+
+  def auth_session_error
+    redirect_to login_path
+  end
 
   def login_required
     unless logged_in?
