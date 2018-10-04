@@ -32,7 +32,8 @@ class AuthenticationController < ApplicationController
     if request.delete?
       auth_session.invalidate! if logged_in?
       reset_session
-      redirect_to logout_path
+      # Set below to your cas or oAuth server
+      redirect_to "https://cas.example.com/logout"
     end
   end
 

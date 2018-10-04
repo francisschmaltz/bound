@@ -30,3 +30,4 @@ module Bound
     config.action_view.field_error_proc = Proc.new { |t, i| t }
   end
 end
+
