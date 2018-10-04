@@ -8,7 +8,7 @@ handles configuration reloads when needed.
 
 ## Installation
 
-1. `git clone https://github.com/adamcooke/bound`
+1. `git clone https://github.com/francisschmaltz/bound`
 2. `cp config/bound.example.yml config/bound.yml`
 3. Make appropriate changes to config file
 4. `bundle`
@@ -22,3 +22,6 @@ handles configuration reloads when needed.
 3. `bundle`
 4. `bundle exec rake assets:precompile db:migrate`
 5. Start the server
+
+## SSO Support
+This app supprots using omniauth to connect your SSO. CAS is built in but can easily be replaced with other omniauth gems.
