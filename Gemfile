@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '~> 5.0.0'
-gem 'mysql2', '>= 0.3.18', '< 0.5'
+gem 'mysql2', '>= 0.4.10', '< 0.5'
 gem 'puma', '~> 3.0'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
@@ -22,7 +22,7 @@ gem 'nissh'
 gem 'net-sftp', :require => 'net/sftp'
 gem 'moonrope'
 gem 'autoprefixer-rails', '~> 6.4'
-gem 'omniauth-cas'
+gem 'omniauth-google-oauth2'
 
 require_relative './lib/bound/config'
 if Bound.yaml_config['auth'] && strategy = Bound.yaml_config['auth']['strategy']

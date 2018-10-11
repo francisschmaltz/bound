@@ -24,4 +24,7 @@ handles configuration reloads when needed.
 5. Start the server
 
 ## SSO Support
-This app supprots using omniauth to connect your SSO. CAS is built in but can easily be replaced with other omniauth gems.
+This app supports using omniauth to connect your SSO. I use CAS for auth but there are also branches for GitHub oAuth or LDAP.
+
+## Notes
+* macOS Mojave needs to run `gem install mysql2 -v '0.4.10' -- --with-ldflags=-L/usr/local/opt/openssl/lib --with-cppflags=-I/usr/local/opt/openssl/include` to install mysql2
