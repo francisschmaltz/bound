@@ -1,6 +1,6 @@
 .lozenge {
   border-radius: 2px;
-  color: $white;
+  color: #ffffff;
   display: inline-block;
   padding: 0 8px;
   font-size: 12px;
@@ -10,14 +10,14 @@
 }
 
 .lozenge--gray {
-  background: $gray-dark;
-  color: $gray-darkest;
+  background: #d7d7d7;
+  color: #777777;
 }
 
 .lozenge--green {
-  background: $green;
+  background: #52bb55;
 }
 
 .lozenge--orange {
-  background: $orange;
+  background: #f87b13;
 }

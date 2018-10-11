@@ -1,5 +1,5 @@
 .header {
-  background: $white;
+  background: #ffffff;
   box-shadow: 0 1px 4px rgba(0, 0, 0, .25);
   margin: 0 0 24px;
 }
@@ -27,7 +27,7 @@
 
 .header__crumbs {
   display: flex;
-  color: $gray-darkest;
+  color: #777777;
   font-size: 14px;
 }
 
@@ -42,7 +42,7 @@
 
 .header__crumbLink {
   &:hover {
-    color: darken($gray-darkest, 5%);
+    color: darken(#777777, 5%);
     text-decoration: underline;
   }
 }

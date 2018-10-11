@@ -6,14 +6,14 @@
 
 html {
   -webkit-font-smoothing: antialiased;
-  color: $black;
+  color: #000000;
   font: 400 14px/22px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   height: 100%;
 }
 
 body {
   align-items: stretch;
-  background: $gray-light;
+  background: #ececec;
   display: flex;
   height: 100%;
   margin: 0;

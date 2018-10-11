@@ -5,22 +5,22 @@
 }
 
 .changeListing--generic {
-  box-shadow: -4px 0 0 $blue;
+  box-shadow: -4px 0 0 #0d97ff;
 }
 
 .changeListing--recordAdded,
 .changeListing--zoneAdded {
-  box-shadow: -4px 0 0 $green;
+  box-shadow: -4px 0 0 #52bb55;
 }
 
 .changeListing--recordDataChanged,
 .changeListing--zoneAttributeChanged {
-  box-shadow: -4px 0 0 $blue;
+  box-shadow: -4px 0 0 #0d97ff;
 }
 
 .changeListing--recordDeleted,
 .changeListing--zoneDeleted {
-  box-shadow: -4px 0 0 $red;
+  box-shadow: -4px 0 0 #e9493e;
 }
 
 .changeListing_desc {
@@ -31,7 +31,7 @@
 }
 
 .changeListing__timestamp {
-  color: $gray-darkest;
+  color: #777777;
   flex: 0 0 auto;
   font-size: 14px;
   white-space: nowrap;

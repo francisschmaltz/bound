@@ -44,7 +44,7 @@
 }
 
 .zoneTable__header {
-  border-bottom: 2px solid $gray-dark;
+  border-bottom: 2px solid #d7d7d7;
   font-weight: 500;
 }
 
@@ -54,7 +54,7 @@
   }
 
   &:active {
-    background: $gray-medium;
+    background: #eaeaea;
     padding: 2px 0;
   }
 }
@@ -70,7 +70,7 @@
   }
 
   &:not(:last-of-type) {
-    border-bottom: 1px solid $gray-medium;
+    border-bottom: 1px solid #eaeaea;
   }
 
   &:nth-of-type(even) {
