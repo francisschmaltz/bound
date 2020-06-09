@@ -1,6 +1,6 @@
 class AuthenticationController < ApplicationController
 
-  skip_before_filter :login_required, :only => [:login, :callback, :join, :logout]
+  skip_before_action :login_required, :only => [:login, :callback, :join, :logout]
 
   def login
     if User.count > 0
