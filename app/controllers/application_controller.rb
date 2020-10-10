@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   rescue_from Authie::Session::InactiveSession, :with => :auth_session_error
   rescue_from Authie::Session::ExpiredSession, :with => :auth_session_error
   rescue_from Authie::Session::BrowserMismatch, :with => :auth_session_error
+  rescue_from Authie::Session::HostMismatch, :with => :auth_session_error
 
   private
 
