@@ -67,8 +67,8 @@ $button-styles: (
     }
 
     &--ghost {
-      background-color: #ffffff;
-      border-color: #ffffff;
+      background-color: rgba(255,255,255,0);
+      border-color: rgba(255,255,255,0);
       color: $color;
 
       &:hover {
@@ -93,5 +93,19 @@ $button-styles: (
 
     &:active {
       background-color: darken(#FAFAFA, 15%);
+    }
+
+    &--ghost {
+      background-color: rgba(255,255,255,0);
+      border-color: rgba(255,255,255,0);
+      color: #444;
+
+      &:hover {
+        background-color: darken(#FAFAFA, 10%);
+      }
+
+      &:active {
+        background-color: darken(#FAFAFA, 20%);
+      }
     }
 }
