@@ -87,11 +87,11 @@ $button-styles: (
     color: #444;
   
     &:hover {
-      background-color: #FAFAFA;
+      background-color: lighten(#FAFAFA, 5%);
       color: #333;
     }
 
     &:active {
-      background-color: darken(#FAFAFA, 5%);
+      background-color: darken(#FAFAFA, 15%);
     }
 }
