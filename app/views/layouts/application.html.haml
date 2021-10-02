@@ -10,7 +10,7 @@
   %body
     - if logged_in?
       = render "shared/sidebar"
-    .content
+    .content.container
       = display_flash
       = yield
     .js-outlet{"data-turbolinks-permanent" => true}

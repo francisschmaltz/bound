@@ -1,12 +1,16 @@
 .flashMessage {
   color: #ffffff;
   padding: 20px 24px;
+  border-radius: 6px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 5px 10px 0px;
 }
 
 .flashMessage--alert {
-  background: #e9493e;
+  background: #e00;
 }
 
 .flashMessage--notice {
-  background: #52bb55;
+  background: #0070f3;
 }
