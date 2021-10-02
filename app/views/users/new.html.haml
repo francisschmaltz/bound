@@ -16,5 +16,4 @@
     .formFooter.module.module--push
       = f.submit "Send invite e-mail", :class => "button button--green"
       %p.formFooter__subText
-        or
-        = link_to "back to user list", users_path, :class => "formFooter__link"
+      = link_to "back to user list", users_path, :class => "button button--secondary"

@@ -1,5 +1,5 @@
 - @page_title = "Users"
-- header_action "Add new user", new_user_path, :color => :black
+- header_action "Add new user", new_user_path, :color => :secondary
 
 = render_header "Users"
 
@@ -12,4 +12,4 @@
             = user.name
           %span.userItem__email
             = user.email_address
-          = link_to "Revoke", user, :class => "button button--red button--small userItem__revoke", :data => {:confirm => "Are you sure you wish to revoke this user's access?"}, :method => :delete
+          = link_to "Revoke", user, :class => "button button--red--ghost button--small userItem__revoke", :data => {:confirm => "Are you sure you wish to revoke this user's access?"}, :method => :delete
