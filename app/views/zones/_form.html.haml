@@ -38,7 +38,6 @@
     .formFooter.module.module--push
       = f.submit "Save", :class => "button button--green", :data => {:disable_with => "Saving"}
       %p.formFooter__subText
-        or
-        = link_to "go back", (@zone.persisted? ? @zone : zones_path), :class => "formFooter__link"
+        = link_to "Back to Zone", (@zone.persisted? ? @zone : zones_path), :class => "button button--secondary"
       - if @zone.persisted?
         = link_to "Delete", @zone, :class => "button button--red", :data => {:confirm => "Are you sure you wish to remove this zone?"}, :method => :delete

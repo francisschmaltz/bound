@@ -3,4 +3,11 @@
   border-radius: 6px;
   border: 1px solid rgba(0,0,0,0.1);
   overflow: hidden;
+  &.box--clickable {
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 2px 4px 0px;
+    transition: box-shadow 175ms;
+    &:hover {
+      box-shadow: rgba(0, 0, 0, 0.125) 0px 4px 8px 0px;
+    }
+  }
 }

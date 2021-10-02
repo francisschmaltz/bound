@@ -1,23 +1,26 @@
 .lozenge {
-  border-radius: 2px;
+  border-radius: 100px;
   color: #ffffff;
   display: inline-block;
   padding: 0 8px;
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 20px;
   text-transform: uppercase;
 }
 
+.lozenge--black {
+  background: #000000;
+}
+
 .lozenge--gray {
-  background: #d7d7d7;
-  color: #777777;
+  background: #000000;
 }
 
 .lozenge--green {
-  background: #52bb55;
+  background: #29BC9B;
 }
 
 .lozenge--orange {
-  background: #f87b13;
+  background: #AB570A;
 }

@@ -5,7 +5,7 @@ module Bound
     class TXT < Bound::RecordType
 
       self.type_name = "TXT"
-      self.color = '62d49f'
+      self.color = '333333'
 
       def fields
         [
