@@ -6,6 +6,20 @@ handles configuration reloads when needed.
 
 ![Screenshot](./demo.png)
 
+
+## Requirements
+
+* Ruby 2.4.0 (I use `rbenv`)
+* Bundler (`gem install bundler`)
+* mysql2 with user/password and db of `bound`
+
+Create database with:
+```
+CREATE DATABASE bound;
+GRANT ALL PRIVILEGES ON bound.* TO 'boundUser'@'localhost';
+FLUSH PRIVILEGES;
+```
+
 ## Installation
 
 1. `git clone https://github.com/francisschmaltz/bound`
@@ -31,3 +45,4 @@ This app supports using omniauth with GitHub oAuth
 ## Notes
 
 - macOS Mojave needs to run `gem install mysql2 -v '0.4.10' -- --with-ldflags=-L/usr/local/opt/openssl/lib --with-cppflags=-I/usr/local/opt/openssl/include` to install mysql2
+- Ubuneu 20 needs to run `sudo apt-get install libmysqlclient-dev` to install mysql2 gem

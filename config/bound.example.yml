@@ -58,7 +58,8 @@ auth:
   client_secret: xxxxxxxxxxxx
   scopes: null
   # Replace host with Bound URL
-  host: http://localhost:3000
+  host: http://localhost:5000
+  # Callback URL is host^^/auth/github/callback
 
 smtp:
   host: localhost
@@ -68,11 +69,11 @@ smtp:
 
 web:
   protocol: http
-  host: localhost:3000
+  host: localhost:5000
 
 web_server:
   bind_address: 0.0.0.0
-  port: 3000
+  port: 5000
   max_threads: 5
 
 dns_defaults:
