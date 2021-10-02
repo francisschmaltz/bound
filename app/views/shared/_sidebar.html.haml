@@ -19,9 +19,13 @@
         = link_to api_tokens_path, :class => "sidebar__menuLink" do
           %span.sidebar__menuLinkText
             API Tokens
-  - if changes_pending > 0
-    .sidebar__apply
-      = link_to "Apply #{pluralize(changes_pending, "Change")}", publish_path, :class => "button button--small button--blocked button--blue"
+      %li.sidebar__menuItem{:class => ("is-active" if @active_nav == :publish)}
+        = link_to publish_path, :class => "sidebar__menuLink" do
+          %span.sidebar__menuLinkText
+            Publish&#8239;&#8239;&#8239;
+          - if changes_pending > 0
+            %span.lozenge.lozenge--black
+              #{pluralize(changes_pending, "Change")}
   %ul.sidebar__footer
     %p.sidebar__footer__content
       %span.text--smaller
