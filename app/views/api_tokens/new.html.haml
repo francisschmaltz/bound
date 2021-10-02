@@ -1,7 +1,7 @@
-- @page_title = "Add new API token"
+- @page_title = "Create new API token"
 - header_action "API Tokens", api_tokens_path, :color => :black
 
-= render_header "Add new API token"
+= render_header "Create new API token"
 
 .container
   = form_for @api_token do |f|
@@ -16,5 +16,4 @@
     .formFooter.module.module--push
       = f.submit "Create token", :class => "button button--green"
       %p.formFooter__subText
-        or
-        = link_to "back to API token list", api_tokens_path, :class => "formFooter__link"
+      = link_to "back to API token list", api_tokens_path, :class => "button button--secondary"
