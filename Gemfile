@@ -23,11 +23,7 @@ gem 'net-sftp', :require => 'net/sftp'
 gem 'moonrope'
 gem 'autoprefixer-rails', '~> 6.4'
 gem 'omniauth-cas'
-
-require_relative './lib/bound/config'
-if Bound.yaml_config['auth'] && strategy = Bound.yaml_config['auth']['strategy']
-  gem "omniauth-#{strategy}"
-end
+gem 'omniauth-github'
 
 group :development, :test do
   gem 'annotate'
