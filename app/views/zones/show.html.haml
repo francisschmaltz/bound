@@ -23,13 +23,15 @@
             TTL
           %td.zoneTable__col.zoneTable__col--data
             Data
+          %td.zoneTable__col.zoneTable__col--default
+            Action
       %tbody
         - if @records.empty?
           %tr
-            %td{:colspan => 4} There are no records for this zone yet.
+            %td{:colspan => 5} There are no records for this zone yet.
         - else
           - @records.each_with_index do |record, index|
-            %tr.boxItem.zoneTable__row.js-zoneRecord.js-objectItem{:class => ("is-hovered" if index.zero?), :data => {:url => edit_zone_record_path(@zone, record)}}
+            %tr.boxItem.zoneTable__row.js-zoneRecord.js-objectItem
               %td.zoneTable__col.zoneTable__col--default
                 = record_type_tag record.type
               %td.zoneTable__col.zoneTable__col--default.js-objectItem__text
@@ -38,5 +40,7 @@
                 = record.ttl
               %td.zoneTable__col.zoneTable__col--data
                 = record.data
+              %td.zoneTable__col.zoneTable__col--default
+                = link_to "Edit Record", edit_zone_record_path(@zone, record), :class => "button button--small button--blue--ghost"
     %p.emptyState.is-hidden.js-emptyState
       No records match your search query…
