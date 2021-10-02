@@ -23,6 +23,7 @@
       .formFooter.module.module--push
         = f.submit "Save record", :class => "button button--green"
         %p.formFooter__subText
-          = link_to "Back to zone", @zone, :class => "button button--secondary"
-        - if @record.persisted?
-          = link_to "Delete", [@zone, @record], :method => :delete, :data => {:confirm => "Are you sure you wish to delete this record?"}, :class => "button button--red"
+          - if @record.persisted?
+            = link_to "Delete", [@zone, @record], :method => :delete, :data => {:confirm => "Are you sure you wish to delete this record?"}, :class => "button button--red"
+        = link_to "Back to zone", @zone, :class => "button button--secondary"
+

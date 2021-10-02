@@ -8,8 +8,9 @@
   = form_tag do
     - if @import.records.empty?
       .box.infoBlock.module
-        = image_tag "info.svg", :class => "infoBlock__icon"
         %p.infoBlock__content
+          %span.infoBlock__content__title
+            Note:
           Paste the records (from a zone file) that you wish to import below.
           If there are any errors importing the file an error will be displayed.
       .box.island.module
@@ -17,12 +18,12 @@
       .formFooter.module.module--push
         = submit_tag "Preview Records", :class => "button button--green"
         %p.formFooter__subText
-          or
-          = link_to "go back to zone", @zone, :class => "formFooter__link"
+        = link_to "Back to Zone", @zone, :class => "button button--secondary"
     - else
-      .box.infoBlock.module
-        = image_tag "info.svg", :class => "infoBlock__icon"
+      .box.infoBlock.infoBlock__success.module
         %p.infoBlock__content
+          %span.infoBlock__content__title
+            Success:
           These are the records which have been detected from the records you have provided.
           To go ahead and add these records just press the button below.
           Records shown with red errors will not be imported and records which match these exactly will be skipped.
@@ -59,6 +60,5 @@
       .formFooter.module.module--push
         = submit_tag "Import Records", :class => "button button--green formFooter__button", :name => "import"
         %p.formFooter__subText
-          or
-          = link_to "go back to zone", @zone, :class => "formFooter__link"
+        = link_to "Back to Zone", @zone, :class => "button button--secondary"
       ~ hidden_field_tag 'records', params[:records]
