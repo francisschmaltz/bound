@@ -1,15 +1,16 @@
 .button {
   -webkit-appearance: none;
   background: #383838;
-  border: 0;
-  border-radius: 2px;
+  border: 1px solid;
   color: #ffffff;
   cursor: pointer;
   display: inline-block;
   font: inherit;
   font-weight: 700;
-  padding: 8px 12px;
+  padding: 4px 8px;
   white-space: nowrap;
+  border-radius: 6px;
+  transition: all 250ms;
 }
 
 /**
@@ -42,22 +43,54 @@
  */
 
 $button-styles: (
-  blue: #0d97ff,
-  green: #52bb55,
-  orange: #f87b13,
-  red: #e9493e
+  black: #000000,
+  secondary: #EAEAEA,
+  blue: #0070F3,
+  green: #0070F3,
+  orange: #EB367F,
+  red: #E00
 );
 
 @each $name, $color in $button-styles {
   .button--#{$name} {
     background-color: $color;
+    border-color: $color;
 
     &:hover {
-      background-color: lighten($color, 5%);
+      background-color: #ffffff;
+      color: $color;
     }
 
     &:active {
       background-color: darken($color, 5%);
     }
+
+    &--ghost {
+      background-color: #ffffff;
+      border-color: #ffffff;
+      color: $color;
+
+      &:hover {
+        background-color: lighten($color, 50%);
+      }
+
+      &:active {
+        background-color: lighten($color, 40%);
+      }
+    }
   }
+}
+
+// Special Button
+.button--secondary {
+    color: #444;
+  
+    &:hover {
+      background-color: #FAFAFA;
+      color: #333;
+    }
+
+    &:active {
+      background-color: darken(#FAFAFA, 5%);
+    }
 }
