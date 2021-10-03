@@ -1,5 +1,5 @@
 - @page_title = "Zones"
-- header_action "Add new zone", new_zone_path, :color => :secondary
+- header_action "Add New Zone", new_zone_path, :color => :secondary
 
 = render_header "Zones"
 
@@ -28,4 +28,7 @@
       No zones match your search query…
   - else
     %p.emptyState
-      No zones have been created yet. #{link_to "Add a new zone", new_zone_path, :class => "emptyState__link"} now.
+      Welcome to Bound! Get started by creating a new DNS zone.
+    %br
+    %center
+      #{link_to "Create New Zone", new_zone_path, :class => "button button--blue"}

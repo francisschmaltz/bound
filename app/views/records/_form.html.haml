@@ -21,9 +21,9 @@
                 = label_tag "record_form_data_#{field[:name]}", field[:label], :class => "formLabel"
                 = record_type_field_tag @record, type, field
       .formFooter.module.module--push
-        = f.submit "Save record", :class => "button button--green"
+        = f.submit "Save Record", :class => "button button--green"
         %p.formFooter__subText
           - if @record.persisted?
-            = link_to "Delete", [@zone, @record], :method => :delete, :data => {:confirm => "Are you sure you wish to delete this record?"}, :class => "button button--red"
-        = link_to "Back to zone", @zone, :class => "button button--secondary"
+            = link_to "Delete Record", [@zone, @record], :method => :delete, :data => {:confirm => "Are you sure you wish to delete this record?"}, :class => "button button--red"
+        = link_to "Cancel", @zone, :class => "button button--secondary"
 

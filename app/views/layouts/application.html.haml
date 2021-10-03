@@ -11,7 +11,9 @@
     - if logged_in?
       = render "shared/sidebar"
     .content.container
-      = display_flash
+      - flash.each do |type, message|
+        %div{:class => "flashMessage flashMessage--#{type}"}
+          = message
       = yield
     .js-outlet{"data-turbolinks-permanent" => true}
       .overlay

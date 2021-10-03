@@ -36,8 +36,8 @@
             = f.label :ttl, "TTL", :class => "formLabel"
             = f.text_field :ttl, :class => "formControl", :placeholder => Bound.config.dns_defaults.ttl
     .formFooter.module.module--push
-      = f.submit "Save", :class => "button button--green", :data => {:disable_with => "Saving"}
+      = f.submit "Save Zone", :class => "button button--green", :data => {:disable_with => "Saving"}
       %p.formFooter__subText
         - if @zone.persisted?
-          = link_to "Delete", @zone, :class => "button button--red", :data => {:confirm => "Are you sure you wish to remove this zone?"}, :method => :delete
-      = link_to "Back to Zone", (@zone.persisted? ? @zone : zones_path), :class => "button button--secondary"
+          = link_to "Delete Zone", @zone, :class => "button button--red", :data => {:confirm => "Are you sure you wish to remove this zone?"}, :method => :delete
+      = link_to "Cancel", (@zone.persisted? ? @zone : zones_path), :class => "button button--secondary"

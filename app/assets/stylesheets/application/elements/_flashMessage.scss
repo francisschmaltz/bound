@@ -1,5 +1,6 @@
 .flashMessage {
-  color: #000000;
+  background-color: #0070F3;
+  color: #FFFFFF;
   padding: 20px 24px;
   border-radius: 6px;
   margin-top: 12px;
@@ -16,5 +17,17 @@
 }
 
 .flashMessage--notice {
+  color: #000000;
   background: #ffffff;
 }
+
+.flashMessage--success {
+  color: #FFFFFF;
+  background: #0070F3;
+}
+
+.flashMessage--warning {
+  color: #AB570A;
+  background: #ffffff;
+}
+

@@ -18,7 +18,7 @@
       .formFooter.module.module--push
         = submit_tag "Preview Records", :class => "button button--green"
         %p.formFooter__subText
-        = link_to "Back to Zone", @zone, :class => "button button--secondary"
+        = link_to "Cancel", @zone, :class => "button button--secondary"
     - else
       .box.infoBlock.infoBlock__success.module
         %p.infoBlock__content
@@ -60,5 +60,5 @@
       .formFooter.module.module--push
         = submit_tag "Import Records", :class => "button button--green formFooter__button", :name => "import"
         %p.formFooter__subText
-        = link_to "Back to Zone", @zone, :class => "button button--secondary"
+        = link_to "Cancel", @zone, :class => "button button--secondary"
       ~ hidden_field_tag 'records', params[:records]

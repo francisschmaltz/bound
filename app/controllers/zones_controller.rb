@@ -22,7 +22,7 @@ class ZonesController < ApplicationController
   def create
     @zone = Zone.new(safe_params)
     if @zone.save
-      redirect_to @zone, :notice => "#{@zone.name} has been created successfully"
+      redirect_to @zone,  success: "#{@zone.name} has been created successfully"
     else
       render 'new'
     end
@@ -30,7 +30,7 @@ class ZonesController < ApplicationController
 
   def update
     if @zone.update(safe_params)
-      redirect_to @zone, :notice => "#{@zone.name} has been updated successfully"
+      redirect_to @zone, success: "#{@zone.name} has been updated successfully"
     else
       render 'edit'
     end
@@ -38,10 +38,11 @@ class ZonesController < ApplicationController
 
   def destroy
     @zone.destroy
-    redirect_to root_path, :notice => "#{@zone.name} has been removed successfully"
+    redirect_to root_path, :alert => "#{@zone.name} has been removed"
   end
 
   def publish
+    @active_nav = :publish
     if request.post?
       publisher = Bound::Publisher.new(:all => Change.pending.empty?)
       publisher.publish

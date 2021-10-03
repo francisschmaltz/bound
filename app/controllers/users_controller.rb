@@ -14,7 +14,7 @@ class UsersController < ApplicationController
     @user = User.new(params.require(:user).permit(:email_address))
     if @user.save
       UserMailer.user_invite(@user).deliver
-      redirect_to users_path, :notice => "An invite has been sent to #{@user.email_address}"
+      redirect_to users_path, :flash => "An invite has been sent to #{@user.email_address}"
     else
       render 'new'
     end
@@ -23,10 +23,10 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     if @user == current_user
-      return redirect_to users_path, :alert => "You cannot revoke your own access"
+      return redirect_to users_path, :notice => "You cannot revoke your own access"
     end
     @user.destroy
-    redirect_to users_path, :notice => "#{@user.description} has been removed successfully"
+    redirect_to users_path, :alert =>  "#{@user.description} has been removed successfully"
   end
 
 end
