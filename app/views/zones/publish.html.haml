@@ -1,14 +1,17 @@
-- @page_title = "Apply Changes"
+- @page_title = "Publish Changes"
 
 - if @changes.any?
-  - header_action "Apply", publish_path, :color => :black, :method => :post
+  - header_action "Apply Changes", publish_path, :color => :black, :method => :post
 
-= render_header "Apply Changes"
+= render_header "Publish Changes"
 
 .container
   - if @changes.empty?
     %p.box.emptyState
-      There are currently no changes pending. Do you want to #{link_to "reload all configuration", publish_path, :class => "emptyState__link", :method => :post}?
+      There are currently no changes pending.
+      %br
+      %br
+      #{link_to "Reload all configuration", publish_path, :class => "button button--small button--secondary--ghost", :method => :post}
   - else
     %ul.box
       - @changes.each do |change|

@@ -31,11 +31,11 @@ class Record < ApplicationRecord
   after_create { Change.create!(:zone => zone, :event => "RecordAdded", :name => description) }
   after_destroy { Change.create!(:zone => zone, :event => "RecordDeleted", :name => description) }
   after_update do
-    if self.data_changed?
+    if self.saved_changes.include?(:data)
       Change.create!(:zone => zone, :event => "RecordDataChanged", :name => description, :old_value => self.data_was, :new_value => self.data)
     end
 
-    if self.name_changed?
+    if self.saved_changes.include?(:name)
       Change.create!(:zone => zone, :event => "RecordRenamed", :name => description, :old_value => self.full_name_was, :new_value => self.full_name)
     end
 
