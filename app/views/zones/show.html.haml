@@ -24,7 +24,7 @@
           %td.zoneTable__col.zoneTable__col--data
             Data
           %td.zoneTable__col.zoneTable__col--default
-            Action
+            &#8239;
       %tbody
         - if @records.empty?
           %tr
@@ -38,7 +38,7 @@
                 = record.name || "@"
               %td.zoneTable__col.zoneTable__col--default
                 = record.ttl
-              %td.zoneTable__col.zoneTable__col--data
+              %td.zoneTable__col.zoneTable__col--data.js-objectItem__text
                 = record.data
               %td.zoneTable__col.zoneTable__col--default
                 = link_to "Edit Record", edit_zone_record_path(@zone, record), :class => "button button--small button--blue--ghost"
