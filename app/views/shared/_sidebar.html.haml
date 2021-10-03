@@ -22,8 +22,9 @@
       %li.sidebar__menuItem{:class => ("is-active" if @active_nav == :publish)}
         = link_to publish_path, :class => "sidebar__menuLink" do
           %span.sidebar__menuLinkText
-            Publish&#8239;&#8239;&#8239;
+            Publish
           - if changes_pending > 0
+            &#8239;&#8239;&#8239;
             %span.lozenge.lozenge--black
               #{pluralize(changes_pending, "Change")}
   %ul.sidebar__footer

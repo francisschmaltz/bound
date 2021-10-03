@@ -8,9 +8,9 @@
   padding: 6px 8px;
   width: 100%;
   border-radius: 6px;
-
+  transition: border 175ms;
   &:focus {
-    border-color: #111111;
+    border-color: #333333;
   }
 }
 
