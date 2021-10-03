@@ -26,7 +26,7 @@ module ApplicationHelper
 
   def record_type_tag(type)
     if type.is_a?(Bound::RecordType)
-      color = type.class.color || "333333"
+      color = type.class.color || "000000"
       content_tag :span, type.type, :class => "lozenge", :style => "background-color: ##{color}; text-align: center; width: 72px;"
     else
       type

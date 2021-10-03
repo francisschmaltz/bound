@@ -14,7 +14,7 @@ class AuthenticationController < ApplicationController
     if session[:invite_token] && user = User.pending.where(:invite_token => session[:invite_token]).first!
       if existing_user = User.where(:provider => auth_hash.provider, :uid => auth_hash.uid).first
         user.destroy
-        do_login existing_user, :flash => "The authenticated user already exists so this has been used."
+        do_login existing_user, :notice => "The authenticated user already exists so this has been used."
       else
         user.copy_attributes_from_auth_hash!(auth_hash)
         do_login user
@@ -33,7 +33,7 @@ class AuthenticationController < ApplicationController
       auth_session.invalidate! if logged_in?
       reset_session
       # Set below to your cas or oAuth server
-      redirect_to "https://cas.example.com/logout"
+      redirect_to "/logout"
     end
   end
 

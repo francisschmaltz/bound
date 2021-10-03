@@ -1,6 +1,6 @@
 - @page_title = "API Tokens"
 
-- header_action "Add new token", new_api_token_path, :color => :green
+- header_action "Create New Token", new_api_token_path, :color => :secondary
 
 = render_header "API Tokens"
 
@@ -14,7 +14,7 @@
               = token.name
             %pre
               ~ token.token
-          = link_to "Revoke", token, :class => "button button--red button--small apiTokenItem__action", :data => {:confirm => "Are you sure you wish to revoke this token's access?"}, :method => :delete
+          = link_to "Revoke", token, :class => "button button--red--ghost button--small apiTokenItem__action", :data => {:confirm => "Are you sure you wish to revoke this token?"}, :method => :delete
   - else
     %p.box.emptyState
       There are no API tokens

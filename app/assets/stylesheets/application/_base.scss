@@ -13,8 +13,9 @@ html {
 
 body {
   align-items: stretch;
-  background: #ececec;
+  background: #fafafa;
   display: flex;
+  flex-direction: column;
   height: 100%;
   margin: 0;
   overflow: hidden;
@@ -54,3 +55,4 @@ p {
 pre {
   margin: 0;
 }
+

@@ -1,12 +1,32 @@
 .flashMessage {
-  color: #ffffff;
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  width: 420px;
+  background-color: #0070F3;
+  color: #FFFFFF;
   padding: 20px 24px;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 5px 10px 0px;
 }
 
 .flashMessage--alert {
-  background: #e9493e;
+  background: #e00;
+  color: #ffffff;
 }
 
 .flashMessage--notice {
-  background: #52bb55;
+  color: #000000;
+  background: #ffffff;
 }
+
+.flashMessage--success {
+  color: #FFFFFF;
+  background: #0070F3;
+}
+
+.flashMessage--warning {
+  color: #AB570A;
+  background: #ffffff;
+}
+

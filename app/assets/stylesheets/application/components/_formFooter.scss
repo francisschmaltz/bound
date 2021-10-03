@@ -1,6 +1,8 @@
 .formFooter {
   align-items: center;
   display: flex;
+  margin-top: 24px;
+  flex-flow: row-reverse;
 }
 
 .formFooter__link {

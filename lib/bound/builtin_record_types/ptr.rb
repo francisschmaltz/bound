@@ -5,7 +5,7 @@ module Bound
     class PTR < Bound::RecordType
 
       self.type_name = "PTR"
-      self.color = 'e93535'
+      self.color = 'FF0080'
 
       def fields
         [

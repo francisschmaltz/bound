@@ -4,34 +4,45 @@
       = image_tag "bound.svg", :class => "sidebar__logoIcon"
       %h1.sidebar__logoText
         Bound
-  - if changes_pending > 0
-    .sidebar__apply
-      .sidebar__container
-        = link_to "Apply #{pluralize(changes_pending, "Change")}", publish_path, :class => "button button--blocked button--green"
   %nav.sidebar__nav
     %ul.sidebar__menu
       %li.sidebar__menuItem{:class => ("is-active" if @active_nav == :zones)}
         = link_to root_path, :class => "sidebar__menuLink" do
-          = image_tag "globe.svg", :alt => "Zones Icon", :class => "sidebar__menuLinkIcon"
           %span.sidebar__menuLinkText
             Zones
       %li.sidebar__menuItem{:class => ("is-active" if @active_nav == :users)}
         = link_to users_path, :class => "sidebar__menuLink" do
-          = image_tag "user.svg", :alt => "Users Icon", :class => "sidebar__menuLinkIcon"
+
           %span.sidebar__menuLinkText
             Users
       %li.sidebar__menuItem{:class => ("is-active" if @active_nav == :tokens)}
         = link_to api_tokens_path, :class => "sidebar__menuLink" do
-          = image_tag "key.svg", :alt => "API Tokens Icon", :class => "sidebar__menuLinkIcon"
           %span.sidebar__menuLinkText
             API Tokens
+      %li.sidebar__menuItem{:class => ("is-active" if @active_nav == :publish)}
+        = link_to publish_path, :class => "sidebar__menuLink" do
+          %span.sidebar__menuLinkText
+            Publish
+          - if changes_pending > 0
+            &#8239;&#8239;&#8239;
+            %span.lozenge.lozenge--black
+              #{pluralize(changes_pending, "Change")}
   %ul.sidebar__footer
-    %p
-      %span.text--smaller
-        Logged in as:
-      %br
-      %strong #{current_user.description}
-    %p.sidebar__footerLogout.text--smaller
-      = link_to "Logout", logout_path, :method => :delete
-  .sidebar__powered.text--smaller
-    Powered by #{link_to "Bound", "https://github.com/francisschmaltz/bound", :class => "sidebar__poweredLink"}
+    %p.sidebar__menuItem
+      %details
+        %summary.sidebar__menuLinkText.summary
+          #{current_user.description}
+          %span.sidebar__menuLinkText__caret
+        %div.sidebar__logoutMenu
+          %div.sidebar__logoutMenu__section
+            %div.sidebar__logoutMenu__text
+              %p.authText
+                Logged In As:
+              %p.authText__user
+                #{current_user.provider}/#{current_user.description}
+          %div.sidebar__logoutMenu__section
+            %strong
+              = link_to "Log Out", logout_path, :class => "sidebar__logoutMenu__link",  :method => :delete
+          %div.sidebar__logoutMenu__section
+            = link_to "Bound on GitHub", 'https://github.com/francisschmaltz/bound', :class => "sidebar__logoutMenu__link"
+        

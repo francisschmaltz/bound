@@ -1,26 +1,68 @@
+// This is actually for the navbar
 .sidebar {
-  background: #3b4549;
-  color: #8d999f;
+  background: #ffffff;
+  color: #000000;
   display: flex;
   flex: 0 0 auto;
-  flex-direction: column;
-  width: 224px;
+  flex-direction: row;
+  box-shadow: 0 0 15px 0 rgba(0,0,0,.1);
+  z-index: 10;
+}
+.sidebar__logoutMenu {
+  position: absolute;
+  right: 12px;
+  background: #ffffff;
+  border-radius: 6px;
+  border: 1px solid rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.2);
+  width: 200px;
+
+  & hr {
+    border: 1px solid rgba(0,0,0,0.1);
+  }
+
+  &__link {
+    padding: 12px;
+    display: block;
+    &:hover {
+      text-decoration: none;
+      background-color: #EAEAEA;
+      color: #111111;
+  
+    }
+  }
+  &__text {
+    padding: 12px;
+    display: block;
+  }
+
+  &__section {
+    &:not(:last-of-type) {
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+  }
+
+  & .authText {
+    font-size: 14px;
+    line-height: 18px;
+    &__user {
+      font-weight: 500;
+    }
+  }
 }
 
 .sidebar__apply {
-  margin: 16px 0;
   flex: 0 0 auto;
   text-align: center;
+  display: flex;
+  align-items: center;
+  margin-right: 24px;
 }
 
 .sidebar__branding {
   align-items: center;
-  background: rgba(0, 0, 0, .1);
-  border-bottom: 1px solid rgba(0, 0, 0, .2);
-  color: #ffffff;
   display: flex;
   flex: 0 0 auto;
-  height: 72px;
 }
 
 .sidebar__container {
@@ -28,11 +70,19 @@
 }
 
 .sidebar__footer {
-  background: rgba(0, 0, 0, .1);
-  border-top: 1px solid rgba(0, 0, 0, .2);
   flex: 0 0 auto;
-  margin: 16px 0 0;
-  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  margin-right: 24px;
+  &__content {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+
+    .text--smaller {
+      line-height: 16px;
+    }
+  }
 }
 
 .sidebar__footerLogout {
@@ -47,22 +97,38 @@
 
 .sidebar__logoIcon {
   display: block;
-  height: 28px;
-  margin: 0 12px 0 0;
-  width: 28px;
+  height: 22px;
+  margin: 0 4px 0 0;
+  width: 22px;
+  filter: invert(1);
 }
 
 .sidebar__logoText {
   font-size: 24px;
   line-height: 32px;
+  font-weight: 600;
+}
+.sidebar__menu {
+  display: flex;
+  flex-direction: row;
 }
 
 .sidebar__menuItem {
-  border-bottom: 1px solid rgba(0, 0, 0, .2);
-
+  position: relative;
+  font-weight: 400;
+  color: #666666;
+  padding: 8px 12px;
   &.is-active {
-    color: #ffffff;
-    font-weight: 700;
+    &::before {
+      content: "";
+      display: block;
+      position: absolute;
+      height: 0;
+      left: 9px;
+      right: 9px;
+      bottom: 0;
+      border-bottom: 2px solid #000000;
+    }
   }
 }
 
@@ -70,12 +136,44 @@
   -webkit-user-select: none;
   align-items: center;
   display: flex;
-  padding: 14px 16px;
   user-select: none;
-
+  border-radius: 6px;
+  padding: 4px 8px;
+  transition: all 175ms;
   &:hover {
-    text-decoration: underline;
+    text-decoration: none;
+    background-color: #EAEAEA;
+    color: #111111;
   }
+}
+.sidebar__menuItem {
+  &.is-active {
+    .sidebar__menuLink {
+      color: #000000;
+    }
+  }
+}
+
+.sidebar__menuLinkText__caret {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  vertical-align: middle;
+  content: "";
+  border-style: solid;
+  border-color: #000000;
+  border-width: 4px 4px 0;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+}
+summary {
+  cursor: pointer;
+  line-height: 40px;
+}
+summary::-webkit-details-marker, summary::marker {
+  display: none; 
+  content: "";
 }
 
 .sidebar__menuLinkIcon {
@@ -94,7 +192,6 @@
 }
 
 .sidebar__powered {
-  background: rgba(0, 0, 0, .2);
   border-top: 1px solid rgba(0, 0, 0, .2);
   flex: 0 0 auto;
   padding: 8px 16px;

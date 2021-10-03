@@ -1,8 +1,9 @@
 - @page_title = @zone.name
 - breadcrumb "Zones", zones_path
-- header_action "Add Record", new_zone_record_path(@zone), :color => :green
-- header_action "Edit", edit_zone_path(@zone), :color => :orange
-- header_action "Import", import_zone_path(@zone), :color => :blue
+- header_action "Edit", edit_zone_path(@zone), :color => :secondary
+- header_action "Import", import_zone_path(@zone), :color => :secondary
+- header_action "View Raw Zone File", zone_file_zone_path(@zone), :color => :secondary
+- header_action "Add Record", new_zone_record_path(@zone), :color => :black
 
 = render_header @zone.description
 
@@ -22,22 +23,24 @@
             TTL
           %td.zoneTable__col.zoneTable__col--data
             Data
+          %td.zoneTable__col.zoneTable__col--default
+            &#8239;
       %tbody
         - if @records.empty?
           %tr
-            %td{:colspan => 4} There are no records for this zone yet.
+            %td{:colspan => 5} There are no records for this zone yet.
         - else
           - @records.each_with_index do |record, index|
-            %tr.boxItem.zoneTable__row.js-zoneRecord.js-objectItem{:class => ("is-hovered" if index.zero?), :data => {:url => edit_zone_record_path(@zone, record)}}
+            %tr.boxItem.zoneTable__row.js-zoneRecord.js-objectItem
               %td.zoneTable__col.zoneTable__col--default
                 = record_type_tag record.type
               %td.zoneTable__col.zoneTable__col--default.js-objectItem__text
                 = record.name || "@"
               %td.zoneTable__col.zoneTable__col--default
                 = record.ttl
-              %td.zoneTable__col.zoneTable__col--data
+              %td.zoneTable__col.zoneTable__col--data.js-objectItem__text
                 = record.data
+              %td.zoneTable__col.zoneTable__col--default
+                = link_to "Edit Record", edit_zone_record_path(@zone, record), :class => "button button--small button--blue--ghost"
     %p.emptyState.is-hidden.js-emptyState
       No records match your search query…
-  .module.u-textRight
-    = link_to "View raw zone file", zone_file_zone_path(@zone), :class => "button button--blue rawButton", :target => "_blank"

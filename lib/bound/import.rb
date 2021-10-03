@@ -14,7 +14,7 @@ module Bound
           @zone_file.gsub(/\r/, '').strip.split(/\n/).map(&:strip).each_with_object([]) do |line, array|
             next if line.starts_with?(';')
             next if line.blank?
-            parts = line.split(/\s+/)
+            parts = line.squish.split(/\s+/)
             record = Record.new(:zone => @zone)
             record.name = parts.shift
 
@@ -23,7 +23,7 @@ module Bound
               record.ttl= next_part
               parts.shift # remove the next IN
             end
-            imported_type = parts.shift.to_s.upcase
+            imported_type = parts.shift.to_s.upcase.gsub(/\s+/, ' ')
             data = parts.join(' ')
             if type = Bound::RecordType.all.values.find { |type| type.type == imported_type }
               record.type = type.class.to_s

@@ -5,7 +5,7 @@ module Bound
     class SSHFP < Bound::RecordType
 
       self.type_name = "SSHFP"
-      self.color = '857357'
+      self.color = 'AB570A'
 
       def fields
         [

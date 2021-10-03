@@ -4,8 +4,8 @@
   .authPage__container
     .box.authPage__box.u-textCenter
       %h1.heading.heading--alpha.authPage__title
-        You have been logged out
+        You Have Been Logged Out
       %p.text--larger.text--subtle
         You&rsquo;ve been logged out of #{content_tag(:strong, "Bound")}. You can now navigate away from this page.
       %p.authPage__button
-        = link_to "Click here to login again", "/auth/#{Bound.config.auth.strategy}", :class => "button button--blocked button--green button--large"
+        = link_to "Log In to Bound", "/auth/#{Bound.config.auth.strategy}", :class => "button button--blocked button--green button--large"

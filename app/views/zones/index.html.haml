@@ -1,5 +1,5 @@
 - @page_title = "Zones"
-- header_action "Add new zone", new_zone_path, :color => :green
+- header_action "Add New Zone", new_zone_path, :color => :secondary
 
 = render_header "Zones"
 
@@ -7,25 +7,28 @@
   - if @zones.any?
     .module
       = text_field_tag :q, "", :autofocus => true, :class => "formControl js-searchObjects", :placeholder => "Search for a zone&hellip;".html_safe
-  .box.module
-    - if @zones.any?
-      %ul
-        - @zones.each_with_index do |zone, index|
-          %li.boxItem.js-objectItem{:class => ("is-hovered" if index.zero?), :data => {:url => zone_path(zone)}}
-            = link_to zone, :class => "zoneItem" do
-              .zoneItem__header
-                %h2.heading.text--larger.zoneItem__desc.js-objectItem__text
-                  = zone.description
-                - if zone.reverse?
-                  %span.lozenge.lozenge--orange.zoneItem__status
-                    Reverse
-                - if zone.changes_pending?
-                  %span.lozenge.lozenge--gray.zoneItem__status
-                    Pending
-              %p.zoneItem__timestamp
-                Last updated #{distance_of_time_in_words_to_now zone.updated_at} ago
-      %p.emptyState.is-hidden.js-emptyState
-        No zones match your search query…
-    - else
-      %p.emptyState
-        No zones have been created yet. #{link_to "Add a new zone", new_zone_path, :class => "emptyState__link"} now.
+      %br
+  - if @zones.any?
+    %ul
+      - @zones.each_with_index do |zone, index|
+        %li.box.box--clickable.module.js-objectItem{ :data => {:url => zone_path(zone)}}
+          = link_to zone, :class => "zoneItem" do
+            .zoneItem__header
+              %h2.heading.text--larger.zoneItem__desc.js-objectItem__text
+                = zone.description
+              - if zone.reverse?
+                %span.lozenge.lozenge--orange.zoneItem__status
+                  Reverse
+              - if zone.changes_pending?
+                %span.lozenge.lozenge--gray.zoneItem__status
+                  Pending
+            %p.zoneItem__timestamp
+              Last updated #{distance_of_time_in_words_to_now zone.updated_at} ago
+    %p.emptyState.is-hidden.js-emptyState
+      No zones match your search query…
+  - else
+    %p.emptyState
+      Welcome to Bound! Get started by creating a new DNS zone.
+    %br
+    %center
+      #{link_to "Create New Zone", new_zone_path, :class => "button button--blue"}

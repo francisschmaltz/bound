@@ -1,20 +1,18 @@
-- @page_title = "Add new API token"
-- header_action "API Tokens", api_tokens_path, :color => :green
+- @page_title = "Create new API token"
 
-= render_header "Add new API token"
+= render_header "Create API Token"
 
 .container
   = form_for @api_token do |f|
     = f.error_messages
     .box.island.island--form.module
       .formGroup
-        = f.label :name, "Name", :class => "formLabel"
+        = f.label :name, "Token Label", :class => "formLabel"
         %p.formHint
           Enter a description to describe what this API token will be used for.
           This will help identify it again in the future.
         = f.text_field :name, :autofocus => true, :class => "formControl"
     .formFooter.module.module--push
-      = f.submit "Create token", :class => "button button--green"
+      = f.submit "Create API Token", :class => "button button--green"
       %p.formFooter__subText
-        or
-        = link_to "back to API token list", api_tokens_path, :class => "formFooter__link"
+      = link_to "Cancel", api_tokens_path, :class => "button button--secondary"

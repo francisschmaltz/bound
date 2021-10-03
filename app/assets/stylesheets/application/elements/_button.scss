@@ -1,15 +1,18 @@
 .button {
   -webkit-appearance: none;
   background: #383838;
-  border: 0;
-  border-radius: 2px;
+  border: 1px solid;
   color: #ffffff;
   cursor: pointer;
   display: inline-block;
   font: inherit;
-  font-weight: 700;
-  padding: 8px 12px;
+  font-weight: 500;
+  line-height: 40px;
+  padding: 0px 12px;
   white-space: nowrap;
+  border-radius: 6px;
+  transition: all 250ms;
+  height: 40px
 }
 
 /**
@@ -25,15 +28,14 @@
  */
 
 .button--small {
-  font-size: 14px;
-  line-height: 22px;
-  padding: 4px 8px;
+  line-height: 30px;
+  height: 32px;
 }
 
 .button--large {
-  font-size: 18px;
-  line-height: 26px;
-  padding: 12px 16px;
+  height: 48px;
+  font-size: 16px;
+  line-height: 48px;
 }
 
 /**
@@ -42,22 +44,68 @@
  */
 
 $button-styles: (
-  blue: #0d97ff,
-  green: #52bb55,
-  orange: #f87b13,
-  red: #e9493e
+  black: #000000,
+  secondary: #EAEAEA,
+  blue: #0070F3,
+  green: #0070F3,
+  orange: #EB367F,
+  red: #E00
 );
 
 @each $name, $color in $button-styles {
   .button--#{$name} {
     background-color: $color;
+    border-color: $color;
 
     &:hover {
-      background-color: lighten($color, 5%);
+      background-color: #ffffff;
+      color: $color;
     }
 
     &:active {
       background-color: darken($color, 5%);
     }
+
+    &--ghost {
+      background-color: rgba(255,255,255,0);
+      border-color: rgba(255,255,255,0);
+      color: $color;
+
+      &:hover {
+        background-color: lighten($color, 50%);
+      }
+
+      &:active {
+        background-color: lighten($color, 40%);
+      }
+    }
   }
+}
+
+// Special Button
+.button--secondary {
+    color: #444;
+  
+    &:hover {
+      background-color: lighten(#FAFAFA, 5%);
+      color: #333;
+    }
+
+    &:active {
+      background-color: darken(#FAFAFA, 15%);
+    }
+
+    &--ghost {
+      background-color: rgba(255,255,255,0);
+      border-color: rgba(255,255,255,0);
+      color: #444;
+
+      &:hover {
+        background-color: darken(#FAFAFA, 10%);
+      }
+
+      &:active {
+        background-color: darken(#FAFAFA, 20%);
+      }
+    }
 }

@@ -8,6 +8,8 @@ class ApplicationController < ActionController::Base
   rescue_from Authie::Session::BrowserMismatch, :with => :auth_session_error
   rescue_from Authie::Session::HostMismatch, :with => :auth_session_error
 
+  add_flash_types :success_flash, :warning
+
   private
 
   def auth_session_error

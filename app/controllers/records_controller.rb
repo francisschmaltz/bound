@@ -20,7 +20,7 @@ class RecordsController < ApplicationController
     @record = @zone.records.build(safe_params)
     @record.form_data = params.dig(:record, :form_data)&.to_unsafe_h
     if @record.save
-      redirect_to zone_path(@zone), :notice => "Record has been added successfully"
+      redirect_to zone_path(@zone), success: "Record has been added successfully"
     else
       render 'new'
     end
@@ -29,7 +29,7 @@ class RecordsController < ApplicationController
   def update
     @record.form_data = params.dig(:record, :form_data)&.to_unsafe_h
     if @record.update(safe_params)
-      redirect_to zone_path(@zone), :notice => "Record has been updated successfully"
+      redirect_to zone_path(@zone), success: "Record has been updated successfully"
     else
       render 'edit'
     end
@@ -37,7 +37,7 @@ class RecordsController < ApplicationController
 
   def destroy
     @record.destroy
-    redirect_to zone_path(@zone), :notice => "Record has been removed successfully"
+    redirect_to zone_path(@zone), :alert => "Record has been removed."
   end
 
   private

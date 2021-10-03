@@ -1,26 +1,23 @@
 .formControl {
   -webkit-appearance: none;
   background: #ffffff;
-  border: 1px solid #d7d7d7;
-  border-radius: 2px;
-  box-shadow: inset 1px 0 4px rgba(0, 0, 0, .125);
+  border: 1px solid #eaeaea;
   display: block;
   font: inherit;
   outline: 0;
   padding: 6px 8px;
   width: 100%;
-
+  border-radius: 6px;
+  transition: border 175ms;
   &:focus {
-    border-color: #0d97ff;
-    box-shadow: 1px 0 4px rgba(4, 166, 221, .375);
+    border-color: #333333;
   }
 }
 
 .formControl[disabled] {
-  background-color: #f7f7f7 !important;
-  box-shadow: inset 1px 0 4px rgba(0, 0, 0, .125);
-  border-color: darken(#d7d7d7, 5%);
-  color: #777777;
+  color: #a9a9a9;
+  background-color: #fafafa;
+  border-top-color: #eaeaea;
   cursor: not-allowed;
 }
 
@@ -36,7 +33,7 @@
 .formControl--select {
   background-image: image-url("select.svg");
   background-position: right 8px top 50%;
-  background-size: auto 12px;
+  background-size: auto 8px;
   background-repeat: no-repeat;
 }
 
