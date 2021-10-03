@@ -28,9 +28,21 @@
             %span.lozenge.lozenge--black
               #{pluralize(changes_pending, "Change")}
   %ul.sidebar__footer
-    %p.sidebar__footer__content
-      %span.text--smaller
-        Logged in as: #{current_user.description}
-      %span.text--smaller
-        %strong
-          = link_to "Log Out", logout_path, :method => :delete
+    %p.sidebar__menuItem
+      %details
+        %summary.sidebar__menuLinkText.summary
+          #{current_user.description}
+          %span.sidebar__menuLinkText__caret
+        %div.sidebar__logoutMenu
+          %div.sidebar__logoutMenu__section
+            %div.sidebar__logoutMenu__text
+              %p.authText
+                Logged In As:
+              %p.authText__user
+                #{current_user.provider}/#{current_user.description}
+          %div.sidebar__logoutMenu__section
+            %strong
+              = link_to "Log Out", logout_path, :class => "sidebar__logoutMenu__link",  :method => :delete
+          %div.sidebar__logoutMenu__section
+            = link_to "Bound on GitHub", 'https://github.com/francisschmaltz/bound', :class => "sidebar__logoutMenu__link"
+        

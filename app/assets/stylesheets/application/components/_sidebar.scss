@@ -8,6 +8,48 @@
   box-shadow: 0 0 15px 0 rgba(0,0,0,.1);
   z-index: 10;
 }
+.sidebar__logoutMenu {
+  position: absolute;
+  right: 12px;
+  background: #ffffff;
+  border-radius: 6px;
+  border: 1px solid rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.2);
+  width: 200px;
+
+  & hr {
+    border: 1px solid rgba(0,0,0,0.1);
+  }
+
+  &__link {
+    padding: 12px;
+    display: block;
+    &:hover {
+      text-decoration: none;
+      background-color: #EAEAEA;
+      color: #111111;
+  
+    }
+  }
+  &__text {
+    padding: 12px;
+    display: block;
+  }
+
+  &__section {
+    &:not(:last-of-type) {
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+  }
+
+  & .authText {
+    font-size: 14px;
+    line-height: 18px;
+    &__user {
+      font-weight: 500;
+    }
+  }
+}
 
 .sidebar__apply {
   flex: 0 0 auto;
@@ -102,7 +144,6 @@
     text-decoration: none;
     background-color: #EAEAEA;
     color: #111111;
-
   }
 }
 .sidebar__menuItem {
@@ -111,6 +152,28 @@
       color: #000000;
     }
   }
+}
+
+.sidebar__menuLinkText__caret {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  vertical-align: middle;
+  content: "";
+  border-style: solid;
+  border-color: #000000;
+  border-width: 4px 4px 0;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+}
+summary {
+  cursor: pointer;
+  line-height: 40px;
+}
+summary::-webkit-details-marker, summary::marker {
+  display: none; 
+  content: "";
 }
 
 .sidebar__menuLinkIcon {
